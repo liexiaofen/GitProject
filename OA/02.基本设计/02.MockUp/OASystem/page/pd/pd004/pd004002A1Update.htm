@@ -1,0 +1,359 @@
+
+
+
+
+ 
+
+
+
+<html>
+<head>
+	<title>OA系统</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<script type="text/javascript">
+		var contextPath = "/OASystem";
+		var EOSDEBUG = true;
+		var FINAL_PANEL_HEIGHT = 22;
+		
+		var IFRAME_MODIFY_HEIGHE = 35;
+		
+		var TREE_MODIFY_HEIGHT = 22;
+	</script>
+	<link  rel="stylesheet" type="text/css" href="../../../resources/css/style.css"/>
+	<link  rel="stylesheet" type="text/css" href="../../../resources/css/main.css"/>
+	<link  rel="stylesheet" type="text/css" href="../../../resources/css/home.css"/>
+	<link  rel="stylesheet" type="text/css" href="../../../resources/css/tab_style.css"/>
+	<link  rel="stylesheet" type="text/css" href="../../../resources/css/autovalidate.css"/>
+	<link  rel="stylesheet" type="text/css" href="../../../resources/css/simpletooltip.css"/>
+	<script type="text/javascript" src="../../../resources/js/jquery-1.4.4.min.js"></script>
+	<script type="text/javascript" src="../../../resources/js/jquery.numberFormat.js"></script>
+	<script type="text/javascript" src="../../../resources/js/jquery.validate.js"></script>
+	<script type="text/javascript" src="../../../resources/js/jquery.singlevalidate.js"></script>
+	<script type="text/javascript" src="../../../resources/js/jquery.autovalidate.js"></script>
+	<script type="text/javascript" src="../../../resources/js/common_busi.js"></script>
+	<script type="text/javascript" src="../../../resources/js/common_init.js"></script>
+	<script type="text/javascript" src="../../../resources/js/messages.js"></script>
+	<script type="text/javascript" src="../../../resources/js/pagination.js"></script>
+	<script type="text/javascript" src="../../../resources/My97DatePicker/WdatePicker.js"></script>
+
+<script type="text/javascript">
+/*
+*名       称: btn_agree()
+*输入参数: 无
+*输出参数: 无
+*机       能: 同意
+*创 建  者: yuliang          
+*创建时间: 2015-12-08
+*更 新  者: 
+*更新时间: 
+*/
+function btn_agree() {
+	
+	if ( !window.confirm( Message.getString("MSG_IC_COMM_0015"))) 
+		return;
+	c_ShowProgressBar(); 
+	window.location.href="pd004001List.htm";	
+}
+/*
+*名       称: btn_reject()
+*输入参数: 无
+*输出参数: 无
+*机       能: 驳回
+*创 建  者: yuliang          
+*创建时间: 2015-12-08
+*更 新  者: 
+*更新时间: 
+*/
+function btn_reject() {
+	
+	if ( !window.confirm( Message.getString("MSG_IC_COMM_0016"))) 
+		return;
+	c_ShowProgressBar(); 
+	window.location.href="pd004001List.htm";	
+}
+/*
+*名       称: btn_back()
+*输入参数: 无
+*输出参数: 无
+*机       能: 返回
+*创 建  者: yuliang          
+*创建时间: 2015-09-16
+*更 新  者: 
+*更新时间: 
+*/
+function btn_back() {	
+	window.location.href="pd004001List.htm";	
+}
+</script>
+</head>
+<body>
+<form id="updateForm" action="" method="post">  
+	<input name="empid" type="hidden"  value="201510081618593Tmi518Bt5GHDr2o"/>
+	<input name="pa001001searchcommand.empname" type="hidden"  value="" />
+	<input name="pa001001searchcommand.entrytimestart" type="hidden"  value="" />
+	<input name="pa001001searchcommand.entrytimeend" type="hidden"  value="" />
+	<input name="pa001001searchcommand.status" type="hidden"  value="" />
+	<input name="pa001001searchcommand.orgcdid" type="hidden"  value="" />
+	<input name="pa001001searchcommand.depid" type="hidden"  value="" />
+	<div class="div_navi"><span><img src="../../../resources/images/home.png">&nbsp;您当前的位置：您当前的位置：审核管理&nbsp;&gt;&nbsp;总经理审核&nbsp;&gt;&nbsp;休假申请审核</span></div>
+	<div class="div_search_title">
+		<table class="tb_title">
+			<tbody>
+				<tr class="tr_caption">
+					<td class="td_caption_mark">
+						<img src="../../../resources/images/m_nav_dian.gif"></img>
+					<td class="td_caption">
+						基本信息
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="div_search_content">
+	  <table class="tb_search">
+	    <tbody>
+			<tr>
+				<td class="td_key" width="8%">
+					<label class="message">申请单号</label>
+				</td>
+				<td class="td_value" width="26%">
+					<input name="empname" class="input_txt dis_input" value="A1-201512090001 " maxlength="20" readonly="readonly"/>
+				</td>
+			</tr>
+			<tr>
+				<td class="td_key" width="8%">
+					<label class="message">申请人</label>
+				</td>
+				<td class="td_value" width="26%">
+					<input name="empname" class="input_txt dis_input" value="薛宝庆" maxlength="20" readonly="readonly"/>
+				</td>
+				<td class="td_key" width="8%">
+					<label class="message">机构</label>
+				</td>
+				<td class="td_value" colspan="3">
+					<input name="orgcddepposes" class="input_bigger2 dis_input" value="上海 - 聯蔚:总经办:董事长,上海 - 坤燭:总经办:董事长" readonly="readonly"/>
+				</td>							
+			</tr>
+			<tr>
+				<td class="td_key" width="8%">
+					<label class="message">请假事由</label>
+				</td>
+				<td class="td_value">
+					<input name="extension" class="input_txt dis_input" value="带薪休假" maxlength="20"  readonly="readonly"/>
+				</td>
+				<td class="td_key" width="8%"><label class="message">其他休假请注明</label></td>
+				<td class="td_value" colspan="3">
+					<input id="skypenum" name="skypenum" class="input_bigger1 dis_input" value="" maxlength="32" readonly="readonly"/>
+				</td>							
+			</tr>
+			<tr>
+				<td class="td_key" width="4%">
+					<label class="message">请假时间</label>
+				</td>
+				<td class="td_value" colspan="3">
+					<input id="skypenum" name="skypenum" class="input_txt dis_input" value="2015-10-12 09:00:00" readonly="readonly"/>~
+					<input id="skypenum" name="skypenum" class="input_txt dis_input" value="2015-10-12 18:00:00" readonly="readonly"/>
+				</td>
+				<td class="td_key" width="8%"><label class="message">总工时</label></td>
+				<td class="td_value">
+					<input id="skypenum" name="skypenum" class="input_txt dis_input" value="8" readonly="readonly"/>小时
+				</td>
+			</tr>
+			<tr>				
+				<td class="td_key" width="8%">
+					<label class="message">备注</label>
+				</td>
+				<td class="td_value" colspan="5">
+					关于休假顺序，原则上先加班调休、后带薪休假（先扣法定后扣福利）
+				</td>
+			</tr>		
+	    </tbody>
+	  </table>
+	</div>
+	<div class="div_search_title">
+		<table class="tb_title">
+			<tbody>
+				<tr class="tr_caption">
+					<td class="td_caption_mark">
+						<img src="../../../resources/images/m_nav_dian.gif"></img>
+					<td class="td_caption">
+						路径设置
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="div_search_content">
+	  <table class="tb_search">
+	    <tbody>
+			<tr>
+				<td class="td_key" width="8%">
+					<label class="message">部门经理审核</label>
+				</td>
+				<td class="td_key" width="10%"><label class="message">人员</label></td>
+				<td class="td_value" width="15%">
+					<input name="extension" class="input_txt dis_input" value="王俊皓" maxlength="20"  readonly="readonly"/>
+				</td>
+				<td class="td_key" width="10%">机构</td>
+				<td class="td_value" width="15%">
+					<input name="extension" class="input_txt dis_input" value="上海 - 聯蔚" maxlength="20"  readonly="readonly"/>
+				</td>
+				<td class="td_key" width="10%"><label class="message">部门</label></td>
+				<td class="td_value">
+					<input name="extension" class="input_txt dis_input" value="业务部" maxlength="20"  readonly="readonly"/>
+				</td>				
+			</tr>
+			<tr>
+				<td class="td_key" width="8%">
+					<label class="message">人事审核</label>
+				</td>
+				<td class="td_key" width="10%"><label class="message">人员</label></td>
+				<td class="td_value" width="15%">
+					<input name="extension" class="input_txt dis_input" value="曹斌" maxlength="20"  readonly="readonly"/>
+				</td>
+				<td class="td_key" width="10%">机构</td>
+				<td class="td_value" width="15%">
+					<input name="extension" class="input_txt dis_input" value="上海 - 聯蔚" maxlength="20"  readonly="readonly"/>
+				</td>
+				<td class="td_key" width="10%"><label class="message">部门</label></td>
+				<td class="td_value">
+					<input name="extension" class="input_txt dis_input" value="管理部" maxlength="20"  readonly="readonly"/>
+				</td>					
+			</tr>
+			<tr>
+				<td class="td_key" width="8%">
+					<label class="message">副总审核</label>
+				</td>
+				<td class="td_key" width="10%"><label class="message">人员</label></td>
+				<td class="td_value" width="15%">
+					<input name="extension" class="input_txt dis_input" value="曹亦然" maxlength="20"  readonly="readonly"/>
+				</td>
+				<td class="td_key" width="10%">机构</td>
+				<td class="td_value" width="15%">
+					<input name="extension" class="input_txt dis_input" value="上海 - 聯蔚" maxlength="20"  readonly="readonly"/>
+				</td>
+				<td class="td_key" width="10%"><label class="message">部门</label></td>
+				<td class="td_value">
+					<input name="extension" class="input_txt dis_input" value="总经办" maxlength="20"  readonly="readonly"/>
+				</td>				
+			</tr>	
+			<tr>
+				<td class="td_key" width="8%">
+					<label class="message">总经理审核</label>
+				</td>
+				<td class="td_key" width="10%"><label class="message">人员</label></td>
+				<td class="td_value" width="15%">
+					<input name="extension" class="input_txt dis_input" value="薛宝庆" maxlength="20"  readonly="readonly"/>
+				</td>
+				<td class="td_key" width="10%">机构</td>
+				<td class="td_value" width="15%">
+					<input name="extension" class="input_txt dis_input" value="上海 - 聯蔚" maxlength="20"  readonly="readonly"/>
+				</td>
+				<td class="td_key" width="10%"><label class="message">部门</label></td>
+				<td class="td_value">
+					<input name="extension" class="input_txt dis_input" value="总经办" maxlength="20"  readonly="readonly"/>
+				</td>			
+			</tr>
+			<tr>
+				<td class="td_key" width="8%">
+					<label class="message">人事归档</label>
+				</td>
+				<td class="td_key" width="10%"><label class="message">人员</label></td>
+				<td class="td_value" width="15%">
+					<input name="extension" class="input_txt dis_input" value="曹斌" maxlength="20"  readonly="readonly"/>
+				</td>
+				<td class="td_key" width="10%">机构</td>
+				<td class="td_value" width="15%">
+					<input name="extension" class="input_txt dis_input" value="上海 - 聯蔚" maxlength="20"  readonly="readonly"/>
+				</td>
+				<td class="td_key" width="10%"><label class="message">部门</label></td>
+				<td class="td_value">
+					<input name="extension" class="input_txt dis_input" value="管理部" maxlength="20"  readonly="readonly"/>
+				</td>			
+			</tr>
+	    </tbody>
+	  </table>
+	</div>
+	<div class="div_search_title">
+		<table class="tb_title">
+			<tbody>
+				<tr class="tr_caption">
+					<td class="td_caption_mark">
+						<img src="../../../resources/images/m_nav_dian.gif"></img>
+					<td class="td_caption">
+						目前剩余假期
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="div_search_content">
+	  <table class="tb_search">
+	    <tbody>
+			<tr>
+				<td class="td_key" width="8%">
+					<label class="message">法定休假</label>
+				</td>
+				<td class="td_value">
+					<input id="username" name="username" class="input_txt dis_input" value="40" readonly="readonly"/>小时
+				</td>
+				<td class="td_key" width="8%">
+					<label class="message">福利休假</label>
+				</td>
+				<td class="td_value">
+					<input id="username" name="username" class="input_txt dis_input" value="16" readonly="readonly"/>小时
+				</td>
+				<td class="td_key" width="8%">
+					<label class="message">加班调休</label>
+				</td>
+				<td class="td_value">
+					<input id="username" name="username" class="input_txt dis_input" value="10" readonly="readonly"/>小时
+				</td>
+			</tr>		
+	    </tbody>
+	  </table>
+	</div>
+	<div class="div_search_title">
+		<table width="100%" cellPadding="0" cellSpacing="0" border="0" >
+			<tbody>
+				<tr class="tr_caption">
+					<td class="td_caption_mark" ><IMG src="../../../resources/images/m_nav_dian.gif"></td>
+					<td class="td_caption">审核履历</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="div_search_content" id="div_view_resumes">
+		<table cellpadding="0" cellspacing="0" border="0" width="100%" class="tb_search">
+			<tr>
+			  	<td class="td_key" width="8%">审核意见</td>
+			  	<td class="td_value"><textarea class="input_memo_lang" name="Reject" id="Reject"></textarea></td>
+			</tr>
+			<tr>
+				<td class="td_key" width="8%">履历</td>
+				<td class="td_value">
+					<textarea class="input_memo_lang dis_input"  readonly="readonly">
+2015-12-09 10:30:01 董事_薛宝庆 申请单填写
+2015-12-09 11:10:05 经理_孙咏梅 部门经理审核
+2015-12-09 12:10:05 经理_曹斌 人事审核
+2015-12-09 15:10:05 副董事_曹亦然 副总审核
+2015-12-09 17:00:01 董事_薛宝庆 总经理审核
+					</textarea>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div class="div_result_button">
+		<table cellPadding="0" cellSpacing="0" align="center" border="0"  width="100%">
+			<tr>
+				<td colspan="2" align="right">					
+					<input name="search" id="search" type="button" class="btn" value="同&nbsp;意" onClick="btn_agree();"/>
+					<input name="search" id="search" type="button" class="btn" value="驳&nbsp;回" onClick="btn_reject();"/>
+					<input name="button" id="reset" type="button" class="btn" value="返&nbsp;回" onClick="btn_back();" />
+				</td>
+			</tr>
+		</table>
+	</div>
+</form>
+</body>
+</html>

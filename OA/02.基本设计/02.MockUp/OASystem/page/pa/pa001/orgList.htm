@@ -1,0 +1,292 @@
+
+
+
+
+ 
+
+
+
+<html>
+<head>
+	<title>OA系统</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<script type="text/javascript">
+		var contextPath = "/OASystem";
+		var EOSDEBUG = true;
+		var FINAL_PANEL_HEIGHT = 22;
+		
+		var IFRAME_MODIFY_HEIGHE = 35;
+		
+		var TREE_MODIFY_HEIGHT = 22;
+	</script>
+	<link  rel="stylesheet" type="text/css" href="../../../resources/css/style.css"/>
+	<link  rel="stylesheet" type="text/css" href="../../../resources/css/main.css"/>
+	<link  rel="stylesheet" type="text/css" href="../../../resources/css/home.css"/>
+	<link  rel="stylesheet" type="text/css" href="../../../resources/css/tab_style.css"/>
+	<link  rel="stylesheet" type="text/css" href="../../../resources/css/autovalidate.css"/>
+	<link  rel="stylesheet" type="text/css" href="../../../resources/css/simpletooltip.css"/>
+	<script type="text/javascript" src="../../../resources/js/jquery-1.4.4.min.js"></script>
+	<script type="text/javascript" src="../../../resources/js/jquery.numberFormat.js"></script>
+	<script type="text/javascript" src="../../../resources/js/jquery.validate.js"></script>
+	<script type="text/javascript" src="../../../resources/js/jquery.singlevalidate.js"></script>
+	<script type="text/javascript" src="../../../resources/js/jquery.autovalidate.js"></script>
+	<script type="text/javascript" src="../../../resources/js/common_busi.js"></script>
+	<script type="text/javascript" src="../../../resources/js/common_init.js"></script>
+	<script type="text/javascript" src="../../../resources/js/messages.js"></script>
+	<script type="text/javascript" src="../../../resources/js/pagination.js"></script>
+	
+
+<script type="text/javascript">
+/*
+*名       称: btn_search()
+*输入参数: 无
+*输出参数: 无
+*机       能: 查询
+*创 建  者: yuliang          
+*创建时间: 2015-09-14
+*更 新  者: 
+*更新时间: 
+*/
+function btn_search() {
+	
+}
+/*
+*名       称: btn_reset()
+*输入参数: 无
+*输出参数: 无
+*机       能: 清空
+*创 建  者: yuliang          
+*创建时间: 2015-09-14
+*更 新  者: 
+*更新时间: 
+*/
+function btn_reset() {
+	if ( !window.confirm( Message.getString("MSG_IC_COMM_0021"))) 
+		return;
+	$("#queryForm").find("input[type='text']").val('');
+	$("#queryForm").find("select").each(function(i,n){
+		$(n).val('');
+	});
+}
+/*
+*名       称: btn_close()
+*输入参数: 无
+*输出参数: 无
+*机       能: 关闭
+*创 建  者: yuliang          
+*创建时间: 2015-10-15
+*更 新  者: 
+*更新时间: 
+*/
+function btn_close() {
+	window.close(); 
+}
+function btn_sure()
+{
+	var retArray = new Array();
+	retArray[0] = '上海 - 聯蔚:总经办:董事,上海 - 坤燭:总经办:董事';
+	retArray[1] = '1,2,3';
+	window.returnValue = retArray; 
+	window.close(); 
+}
+//初始化全选框
+$(function() {
+    $("#checkAll").click(function() {
+         $('input[name="chk"]').attr("checked",this.checked); 
+     });
+     var $chk = $("input[name='chk']");
+     $chk.click(function(){
+         $("#checkAll").attr("checked",$chk.length == $("input[name='chk']:checked").length ? true : false);
+     });
+ });
+</script>
+</head>
+<body>
+<form id="queryForm" action="" method="post" > 
+	<div class="div_navi"><span><img src="../../../resources/images/home.png">&nbsp;您当前的位置：主表管理&nbsp;&gt;&nbsp;员工信息&nbsp;&gt;&nbsp;机构信息一览</span></div>
+	<br/>
+	<div class="div_search_title">
+		<table class="tb_title">
+			<tbody>
+				<tr class="tr_caption">
+					<td class="td_caption_mark">
+						<img src="../../../resources/images/m_nav_dian.gif"></img>
+					<td class="td_caption">
+						查询条件
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="div_search_content">
+	  <table class="tb_search check_specialchar">
+	    <tbody>
+			<tr>
+				<td class="td_key" width="8%" nowrap><label class="message">区域</label></td>
+				<td class="td_value" width="42%">
+					<select id='status' name= 'status' class='input_select' >
+						<option value=''>全部</option>
+						<option value='0'>上海</option>
+						<option value='1'>北京</option>
+					</select>
+				</td>
+				<td class="td_key" width="8%" nowrap><label class="message">机构全称</label></td>
+				<td class="td_value">
+					<input name="empname" class="input_txt" value="" maxlength="20" />
+				</td>
+			</tr> 
+			<tr>
+				<td colspan="4" align="right">					
+					<input name="search" id="search" type="button" class="btn" value="查&nbsp;询" onClick="btn_search();"/>
+					<input name="button" id="reset" type="button" class="btn" value="清&nbsp;空" onClick="btn_reset();">
+					<input name="search" id="search" type="button" class="btn" value="关&nbsp;闭" onClick="btn_close();"/>
+				</td>
+	      	</tr>
+	    </tbody>
+	  </table>
+	</div>
+</form>
+
+	<div class="div_result_title">
+		<table class="tb_title">
+			<tbody>
+				<tr class="tr_caption">
+					<td class="td_caption_mark">
+						<img src="../../../resources/images/m_nav_dian.gif"></td>
+					<td class="td_caption">
+						查询结果
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="div_result" id="div_result" style="width:98%;height:300px;overflow-x:scroll;">  
+		<table id="tresult" class="pg_result">
+		    <tr class="pg_result_head">
+				<td width="3%"><input type="checkbox" name="checkAll" id="checkAll" value='abc'/></td>
+		    	<td width="3%">&nbsp;序号&nbsp;</td>
+				<td>&nbsp;机构全称&nbsp;</td>
+				<td width="15%">&nbsp;机构简称&nbsp;</td>				
+				<td width="8%">&nbsp;区域&nbsp;</td>
+				<td width="8%">&nbsp;部门&nbsp;</td>
+				<td width="8%">&nbsp;职称&nbsp;</td>
+			</tr>
+		    <tbody id="body_result">		    	
+		    		<tr class="pg_result_content">	
+						<td align="center" nowrap><input type="checkbox" name="chk" /></td>
+						<td align="center" nowrap>1</td>
+		    			<td align="left" nowrap>聯蔚（上海）融資租賃有限公司</td>
+						<td align="left" nowrap>上海 - 聯蔚</td>
+						<td align="center" nowrap>上海</td>
+						<td align="center" nowrap>
+							<select id='depid' name= 'depid' class='input_select2' >
+								<option value='0'>总经办</option>
+								<option value='1'>管理部</option>
+								<option value='2'>中台/审查部</option>
+								<option value='3'>业务部</option>
+								<option value='4'>IT部</option>
+							</select>
+						</td>
+						<td align="center" nowrap>
+							<select id='depid' name= 'depid' class='input_select2' >
+								<option value='0'>董事长</option>
+								<option value='1'>董事</option>
+								<option value='2'>副董事</option>
+								<option value='3'>经理</option>
+								<option value='4'>副经理</option>
+								<option value='4'>担当</option>
+							</select>
+						</td>
+		    		</tr>		    	
+		    		<tr class="pg_result_content">	
+						<td align="center" nowrap><input type="checkbox" name="chk" /></td>
+		    			<td align="center" nowrap>2</td>
+						<td align="left" nowrap>上海坤燭股權投資基金管理有限公司</td>
+						<td align="left" nowrap>上海 - 坤燭</td>
+						<td align="center" nowrap>上海</td>
+						<td align="center" nowrap>
+							<select id='depid' name= 'depid' class='input_select2' >
+								<option value='0'>总经办</option>
+								<option value='1'>管理部</option>
+								<option value='2'>中台/审查部</option>
+								<option value='3'>业务部</option>
+								<option value='4'>IT部</option>
+							</select>
+						</td>
+						<td align="center" nowrap>
+							<select id='depid' name= 'depid' class='input_select2' >
+								<option value='0'>董事长</option>
+								<option value='1'>董事</option>
+								<option value='2'>副董事</option>
+								<option value='3'>经理</option>
+								<option value='4'>副经理</option>
+								<option value='4'>担当</option>
+							</select>
+						</td>
+		    		</tr>	    			    	
+		    		<tr class="pg_result_content">	
+						<td align="center" nowrap><input type="checkbox" name="chk" /></td>
+		    			<td align="center" nowrap>3</td>
+						<td align="left" nowrap>上海桂港貿易有限公司</td>
+						<td align="left" nowrap>上海 - 桂港</td>
+						<td align="center" nowrap>上海</td>
+						<td align="center" nowrap>
+							<select id='depid' name= 'depid' class='input_select2' >
+								<option value='0'>总经办</option>
+								<option value='1'>管理部</option>
+								<option value='2'>中台/审查部</option>
+								<option value='3'>业务部</option>
+								<option value='4'>IT部</option>
+							</select>
+						</td>
+						<td align="center" nowrap>
+							<select id='depid' name= 'depid' class='input_select2' >
+								<option value='0'>董事长</option>
+								<option value='1'>董事</option>
+								<option value='2'>副董事</option>
+								<option value='3'>经理</option>
+								<option value='4'>副经理</option>
+								<option value='4'>担当</option>
+							</select>
+						</td>
+		    		</tr>		    	
+		    		<tr class="pg_result_content">		
+						<td align="center" nowrap><input type="checkbox" name="chk" /></td>
+		    			<td align="center" nowrap>4</td>
+						<td align="left" nowrap>企原（上海）金属资源有限公司</td>
+						<td align="left" nowrap>上海 - 企原</td>
+						<td align="center" nowrap>上海</td>
+						<td align="center" nowrap>
+							<select id='depid' name= 'depid' class='input_select2' >
+								<option value='0'>总经办</option>
+								<option value='1'>管理部</option>
+								<option value='2'>中台/审查部</option>
+								<option value='3'>业务部</option>
+								<option value='4'>IT部</option>
+							</select>
+						</td>
+						<td align="center" nowrap>
+							<select id='depid' name= 'depid' class='input_select2' >
+								<option value='0'>董事长</option>
+								<option value='1'>董事</option>
+								<option value='2'>副董事</option>
+								<option value='3'>经理</option>
+								<option value='4'>副经理</option>
+								<option value='4'>担当</option>
+							</select>
+						</td>
+		    		</tr>
+		    </tbody>
+		</table>
+	</div>
+	<div class="div_result_button">
+		<table cellPadding="0" cellSpacing="0" align="center" border="0"  width="100%">
+		  <tr>
+			<td align="left">			
+				 <input name="search" id="search" type="button" class="btn" value="确&nbsp;认" onClick="btn_sure();"/>		
+			</td>
+		  </tr>
+		</table>
+  </div>
+</body>
+</html>

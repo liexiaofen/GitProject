@@ -1,0 +1,361 @@
+
+
+
+
+ 
+
+
+
+<html>
+<head>
+	<title>OA系统</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<script type="text/javascript">
+		var contextPath = "/OASystem";
+		var EOSDEBUG = true;
+		var FINAL_PANEL_HEIGHT = 22;
+		
+		var IFRAME_MODIFY_HEIGHE = 35;
+		
+		var TREE_MODIFY_HEIGHT = 22;
+	</script>
+	<link  rel="stylesheet" type="text/css" href="../../../resources/css/style.css"/>
+	<link  rel="stylesheet" type="text/css" href="../../../resources/css/main.css"/>
+	<link  rel="stylesheet" type="text/css" href="../../../resources/css/home.css"/>
+	<link  rel="stylesheet" type="text/css" href="../../../resources/css/tab_style.css"/>
+	<link  rel="stylesheet" type="text/css" href="../../../resources/css/autovalidate.css"/>
+	<link  rel="stylesheet" type="text/css" href="../../../resources/css/simpletooltip.css"/>
+	<script type="text/javascript" src="../../../resources/js/jquery-1.4.4.min.js"></script>
+	<script type="text/javascript" src="../../../resources/js/jquery.numberFormat.js"></script>
+	<script type="text/javascript" src="../../../resources/js/jquery.validate.js"></script>
+	<script type="text/javascript" src="../../../resources/js/jquery.singlevalidate.js"></script>
+	<script type="text/javascript" src="../../../resources/js/jquery.autovalidate.js"></script>
+	<script type="text/javascript" src="../../../resources/js/common_busi.js"></script>
+	<script type="text/javascript" src="../../../resources/js/common_init.js"></script>
+	<script type="text/javascript" src="../../../resources/js/messages.js"></script>
+	<script type="text/javascript" src="../../../resources/js/pagination.js"></script>
+	<script type="text/javascript" src="../../../resources/My97DatePicker/WdatePicker.js"></script>
+
+
+<script type="text/javascript">
+/*
+*名       称: btn_search()
+*输入参数: 无
+*输出参数: 无
+*机       能: 查询
+*创 建  者: yuliang          
+*创建时间: 2015-09-14
+*更 新  者: 
+*更新时间: 
+*/
+function btn_search() {
+	c_ShowProgressBar(); 
+	window.location.href="pa003001List.htm";
+}
+/*
+*名       称: btn_insert()
+*输入参数: 无
+*输出参数: 无
+*机       能: 登录
+*创 建  者: yuliang          
+*创建时间: 2015-09-14
+*更 新  者: 
+*更新时间: 
+*/
+function btn_insert() {
+	window.location.href="pa003003Insert.htm";
+}
+/*
+*名       称: link_view( id)
+*输入参数: 无
+*输出参数: 无
+*机       能: Link到明细
+*创 建  者: yuliang          
+*创建时间: 2015-09-14
+*更 新  者: 
+*更新时间: 
+*/
+function link_view( obj){
+	window.location.href="pa003002Update.htm";
+}
+/*
+*名       称: btn_reset()
+*输入参数: 无
+*输出参数: 无
+*机       能: 清空
+*创 建  者: yuliang          
+*创建时间: 2015-09-14
+*更 新  者: 
+*更新时间: 
+*/
+function btn_reset() {
+	if ( !window.confirm( Message.getString("MSG_IC_COMM_0021"))) 
+		return;
+	$("#queryForm").find("input[type='text']").val('');
+	$("#queryForm").find("select").each(function(i,n){
+		$(n).val('');
+	});
+}
+</script>
+</head>
+<body>
+<form id="queryForm" action="" method="post" > 
+	<div class="div_navi"><span><img src="../../../resources/images/home.png">&nbsp;您当前的位置：主表管理&nbsp;&gt;&nbsp;法定日信息&nbsp;&gt;&nbsp;法定日信息一览</span></div>
+	<div class="div_search_title">
+		<table class="tb_title">
+			<tbody>
+				<tr class="tr_caption">
+					<td class="td_caption_mark">
+						<img src="../../../resources/images/m_nav_dian.gif"></img>
+					<td class="td_caption">
+						查询条件
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="div_search_content">
+	  <table class="tb_search check_specialchar">
+	    <tbody>
+			<tr>
+				<td class="td_key" width="8%" nowrap><label class="message">年份</label></td>
+				<td class="td_value" width="26%">
+					<select id='orgcdid' name= 'orgcdid' class='input_select' >
+						<option value='2014'>2014</option>
+						<option value='2015' selected>2015</option>
+						<option value='2016'>2016</option>
+					</select>
+				</td>
+				<td class="td_key" width="8%" nowrap><label class="message">月份</label></td>
+				<td class="td_value" width="26%">
+					<select id='orgcdid' name= 'orgcdid' class='input_select' >
+						<option value=''>全部</option>
+						<option value='1'>1</option>
+						<option value='2'>2</option>
+						<option value='3'>3</option>
+						<option value='4'>4</option>
+						<option value='5'>5</option>
+						<option value='6'>6</option>
+						<option value='7'>7</option>
+						<option value='8'>8</option>
+						<option value='9'>9</option>
+						<option value='10'>10</option>
+						<option value='11'>11</option>
+						<option value='12'>12</option>
+					</select>
+				</td>
+				<td class="td_key" width="8%" nowrap><label class="message">日期</label></td>
+				<td class="td_value" >
+					<input name="daily" class="input_date Wdate" readonly="readonly" value="" onclick="WdatePicker()" />
+				</td>
+			</tr> 
+			<tr>
+				<td colspan="6" align="right">					
+					<input name="search" id="search" type="button" class="btn" value="查&nbsp;询" onClick="btn_search();"/>
+					<input name="button" id="reset" type="button" class="btn" value="清&nbsp;空" onClick="btn_reset();">
+					<input name="button" id="login" type="button" class="btn" value="登&nbsp;录" onClick="btn_insert();"> 
+				</td>
+	      	</tr>
+	    </tbody>
+	  </table>
+	</div>
+</form>
+
+	<div class="div_result_title">
+		<table class="tb_title">
+			<tbody>
+				<tr class="tr_caption">
+					<td class="td_caption_mark">
+						<img src="../../../resources/images/m_nav_dian.gif"></td>
+					<td class="td_caption">
+						查询结果
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="div_result" id="div_result">  
+		<table id="tresult" class="pg_result">
+		    <tr class="pg_result_head">
+		    	<td width="3%">&nbsp;序号&nbsp;</td>
+				<td width="10%">&nbsp;日期&nbsp;</td>
+				<td width="10%">&nbsp;星期&nbsp;</td>				
+				<td width="10%">&nbsp;周&nbsp;</td>
+				<td width="10%">&nbsp;天数&nbsp;</td>
+				<td width="10%">&nbsp;是否工作日&nbsp;</td>
+				<td>&nbsp;&nbsp;</td>
+			</tr>
+		    <tbody id="body_result">
+		    	
+		    		<tr class="pg_result_content">		    			
+		    			<td align="center" nowrap>1</td>
+						<td align="center" nowrap>
+							<a href="#" onclick="javascript:link_view(this);return false;">2015-01-01</a>
+						</td>
+						<td align="left" nowrap>周四</td>
+						<td align="left" nowrap>第1周</td>
+						<td align="left" nowrap>第1天</td>
+						<td align="center" nowrap>否</td>	
+						<td align="left" nowrap></td>
+		    		</tr>		    	
+		    		<tr class="pg_result_content">
+		    			<td align="center" nowrap>2</td>
+						<td align="center" nowrap>
+							<a href="#" onclick="javascript:link_view(this);return false;">2015-01-02</a>
+						</td>
+						<td align="left" nowrap>周五</td>
+						<td align="left" nowrap>第1周</td>
+						<td align="left" nowrap>第2天</td>
+						<td align="center" nowrap>否</td>	
+						<td align="left" nowrap></td>
+		    		</tr>		    	
+		    		<tr class="pg_result_content">		    			
+		    			<td align="center" nowrap>3</td>
+						<td align="center" nowrap>
+							<a href="#" onclick="javascript:link_view(this);return false;">2015-01-03</a>
+						</td>
+						<td align="left" nowrap>周六</td>
+						<td align="left" nowrap>第1周</td>
+						<td align="left" nowrap>第3天</td>
+						<td align="center" nowrap>否</td>	
+						<td align="left" nowrap></td>
+		    		</tr>		    	
+		    		<tr class="pg_result_content">
+		    			
+		    			<td align="center" nowrap>4</td>
+						<td align="center" nowrap>
+							<a href="#" onclick="javascript:link_view(this);return false;">2015-01-04</a>
+						</td>
+						<td align="left" nowrap>周日</td>
+						<td align="left" nowrap>第1周</td>
+						<td align="left" nowrap>第4天</td>
+						<td align="center" nowrap>否</td>	
+						<td align="left" nowrap></td>
+		    		</tr>
+		    	
+		    		<tr class="pg_result_content">
+		    			
+		    			<td align="center" nowrap>5</td>
+						<td align="center" nowrap>
+							<a href="#" onclick="javascript:link_view(this);return false;">2015-01-05</a>
+						</td>
+						<td align="left" nowrap>周一</td>
+						<td align="left" nowrap>第2周</td>
+						<td align="left" nowrap>第5天</td>
+						<td align="center" nowrap>是</td>	
+						<td align="left" nowrap></td>
+		    		</tr>
+		    	
+		    		<tr class="pg_result_content">
+		    			
+		    			<td align="center" nowrap>6</td>
+						<td align="center" nowrap>
+							<a href="#" onclick="javascript:link_view(this);return false;">2015-01-06</a>
+						</td>
+						<td align="left" nowrap>周二</td>
+						<td align="left" nowrap>第2周</td>
+						<td align="left" nowrap>第6天</td>
+						<td align="center" nowrap>是</td>	
+						<td align="left" nowrap></td>
+		    		</tr>
+		    	
+		    		<tr class="pg_result_content">
+		    			
+		    			<td align="center" nowrap>7</td>
+						<td align="center" nowrap>
+							<a href="#" onclick="javascript:link_view(this);return false;">2015-01-07</a>
+						</td>
+						<td align="left" nowrap>周三</td>
+						<td align="left" nowrap>第2周</td>
+						<td align="left" nowrap>第7天</td>
+						<td align="center" nowrap>是</td>	
+						<td align="left" nowrap></td>
+		    		</tr>
+		    	
+		    		<tr class="pg_result_content">
+		    			
+		    			<td align="center" nowrap>8</td>
+						<td align="center" nowrap>
+							<a href="#" onclick="javascript:link_view(this);return false;">2015-01-08</a>
+						</td>
+						<td align="left" nowrap>周四</td>
+						<td align="left" nowrap>第2周</td>
+						<td align="left" nowrap>第8天</td>
+						<td align="center" nowrap>是</td>	
+						<td align="left" nowrap></td>
+		    		</tr>
+		    	
+		    		<tr class="pg_result_content">
+		    			
+		    			<td align="center" nowrap>9</td>
+						<td align="center" nowrap>
+							<a href="#" onclick="javascript:link_view(this);return false;">2015-01-09</a>
+						</td>
+						<td align="left" nowrap>周五</td>
+						<td align="left" nowrap>第2周</td>
+						<td align="left" nowrap>第9天</td>
+						<td align="center" nowrap>是</td>	
+						<td align="left" nowrap></td>
+		    		</tr>
+		    	
+		    		<tr class="pg_result_content">
+		    			
+		    			<td align="center" nowrap>10</td>
+						<td align="center" nowrap>
+							<a href="#" onclick="javascript:link_view(this);return false;">2015-01-10</a>
+						</td>
+						<td align="left" nowrap>周六</td>
+						<td align="left" nowrap>第2周</td>
+						<td align="left" nowrap>第10天</td>
+						<td align="center" nowrap>否</td>	
+						<td align="left" nowrap></td>
+		    		</tr>
+		    		
+		    </tbody>
+		</table>
+	</div>
+
+<form action="pa001001page" id="pageform" name="pageform" method="post" >
+	
+	<input name="empname" type="hidden"  value="" />
+	<input name="entrytimestart" type="hidden"  value="" />
+	<input name="entrytimeend" type="hidden"  value="" />
+	<input name="status" type="hidden"  value="" />
+	<input name="orgcdid" type="hidden"  value="" />
+	<input name="depid" type="hidden"  value="" />
+	<input name="pageSize" type="hidden" value="10"/>
+	<input name="curPage" type="hidden" value="1"/>
+	<input name="totalPage" type="hidden" value="37"/>
+	<input name="firstPage" type="hidden" value="true"/>
+	<input name="lastPage" type="hidden" value="false"/>
+	<input name="totalRecord" type="hidden" value="365"/>
+	
+	<!--Start Page Infor-->
+	
+		<div class="div_page"> 
+			<script type="text/javascript">
+				var curPage = $('#pageform').find('input[name="curPage"]').val();
+				var totalPage = $('#pageform').find('input[name="totalPage"]').val();
+				var firstPage = $('#pageform').find('input[name="firstPage"]').val();
+				var lastPage = $('#pageform').find('input[name="lastPage"]').val();
+				pagination("page", "pa001001page","pageform",curPage,totalPage,firstPage,lastPage);
+			</script>
+		</div>
+	
+	<!--End Page Infor-->
+</form>
+
+<form action="pa001001view" id="viewForm" name="viewForm" method="post">
+	
+	<input name="empname" type="hidden"  value="" />
+	<input name="entrytimestart" type="hidden"  value="" />
+	<input name="entrytimeend" type="hidden"  value="" />
+	<input name="status" type="hidden"  value="" />
+	<input name="orgcdid" type="hidden"  value="" />
+	<input name="depid" type="hidden"  value="" />
+		
+	<input name="empid" type="hidden"  />
+</form>
+
+</body>
+</html>

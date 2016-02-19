@@ -1,0 +1,365 @@
+
+
+
+
+ 
+
+
+
+<html>
+<head>
+	<title>OA系统</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<script type="text/javascript">
+		var contextPath = "/OASystem";
+		var EOSDEBUG = true;
+		var FINAL_PANEL_HEIGHT = 22;
+		
+		var IFRAME_MODIFY_HEIGHE = 35;
+		
+		var TREE_MODIFY_HEIGHT = 22;
+	</script>
+	<link  rel="stylesheet" type="text/css" href="../../../resources/css/style.css"/>
+	<link  rel="stylesheet" type="text/css" href="../../../resources/css/main.css"/>
+	<link  rel="stylesheet" type="text/css" href="../../../resources/css/home.css"/>
+	<link  rel="stylesheet" type="text/css" href="../../../resources/css/tab_style.css"/>
+	<link  rel="stylesheet" type="text/css" href="../../../resources/css/autovalidate.css"/>
+	<link  rel="stylesheet" type="text/css" href="../../../resources/css/simpletooltip.css"/>
+	<script type="text/javascript" src="../../../resources/js/jquery-1.4.4.min.js"></script>
+	<script type="text/javascript" src="../../../resources/js/jquery.numberFormat.js"></script>
+	<script type="text/javascript" src="../../../resources/js/jquery.validate.js"></script>
+	<script type="text/javascript" src="../../../resources/js/jquery.singlevalidate.js"></script>
+	<script type="text/javascript" src="../../../resources/js/jquery.autovalidate.js"></script>
+	<script type="text/javascript" src="../../../resources/js/common_busi.js"></script>
+	<script type="text/javascript" src="../../../resources/js/common_init.js"></script>
+	<script type="text/javascript" src="../../../resources/js/messages.js"></script>
+	<script type="text/javascript" src="../../../resources/js/pagination.js"></script>
+	<script type="text/javascript" src="../../../resources/My97DatePicker/WdatePicker.js"></script>
+
+
+<script type="text/javascript">
+/*
+*名       称: btn_search()
+*输入参数: 无
+*输出参数: 无
+*机       能: 查询
+*创 建  者: yuliang          
+*创建时间: 2015-09-14
+*更 新  者: 
+*更新时间: 
+*/
+function btn_search() {
+	c_ShowProgressBar(); 
+	window.location.href="fa004001List.htm";
+}
+/*
+*名       称: btn_reset()
+*输入参数: 无
+*输出参数: 无
+*机       能: 清空
+*创 建  者: yuliang          
+*创建时间: 2015-09-14
+*更 新  者: 
+*更新时间: 
+*/
+function btn_reset() {
+	if ( !window.confirm( Message.getString("MSG_IC_COMM_0021"))) 
+		return;
+	$("#queryForm").find("input[type='text']").val('');
+	$("#queryForm").find("select").each(function(i,n){
+		$(n).val('');
+	});
+}
+function img_insert1() {
+	var htmlText = "<tr class=\"pg_result_content\">" +		    			
+						"<td align=\"left\" nowrap><input name=\"empname2\" class=\"input_txt\" value=\"\" maxlength=\"50\" /></td>" +
+						"<td align=\"left\" nowrap><input name=\"empname2\" class=\"input_txt\" value=\"\" maxlength=\"50\" /></td>" +	
+						"<td align=\"center\" nowrap>" +
+							"<img src=\"../../../resources/images/img_sub.gif\" class=\"img_lookup\" onClick=\"img_delete(this)\"></img>" +
+						"</td>" +	
+					"</tr>";
+	$("#body_result1").append(htmlText);
+}
+function img_insert2() {
+	var htmlText = "<tr class=\"pg_result_content\">" +		    			
+						"<td align=\"left\" nowrap><input name=\"empname2\" class=\"input_txt\" value=\"\" maxlength=\"50\" /></td>" +
+						"<td align=\"left\" nowrap><input name=\"empname2\" class=\"input_txt\" value=\"\" maxlength=\"50\" /></td>" +	
+						"<td align=\"left\" nowrap><input name=\"empname2\" class=\"input_small\" value=\"\" maxlength=\"50\" /></td>" +	
+						"<td align=\"center\" nowrap>" +
+							"<img src=\"../../../resources/images/img_sub.gif\" class=\"img_lookup\" onClick=\"img_delete(this)\"></img>" +
+						"</td>" +	
+					"</tr>";
+	$("#body_result2").append(htmlText);
+}
+function img_delete(obj) {
+	$(obj).parent().parent().remove();
+}
+function img_delete1(obj) {
+	$(obj).parent().parent().hide();
+}
+</script>
+</head>
+<body>
+<form id="queryForm" action="" method="post" > 
+	<div class="div_navi"><span><img src="../../../resources/images/home.png">&nbsp;您当前的位置：系统管理&nbsp;&gt;&nbsp;业务字典信息&nbsp;&gt;&nbsp;业务字典信息一览</span></div>
+	<div class="div_search_title">
+		<table class="tb_title">
+			<tbody>
+				<tr class="tr_caption">
+					<td class="td_caption_mark">
+						<img src="../../../resources/images/m_nav_dian.gif"></img>
+					<td class="td_caption">
+						业务字典类型
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="div_search_content">
+	  <table class="tb_search check_specialchar">
+	    <tbody>
+			<tr>
+				<td class="td_key" width="8%" nowrap><label class="message">类型代码</label></td>
+				<td class="td_value" width="26%">
+					<input name="empname" class="input_txt" value="" maxlength="20" />
+				</td>
+				<td class="td_key" width="8%" nowrap><label class="message">类型名称</label></td>
+				<td class="td_value" width="26%">
+					<input name="empname" class="input_txt" value="" maxlength="20" />
+				</td>
+			</tr>
+			<tr>
+				<td colspan="6" align="right">					
+					<input name="search" id="search" type="button" class="btn" value="查&nbsp;询" onClick="btn_search();"/>
+					<input name="button" id="reset" type="button" class="btn" value="清&nbsp;空" onClick="btn_reset();">
+					<input name="button" id="login" type="button" class="btn" value="刷新缓存" onClick="btn_refreshCache();"> 
+				</td>
+	      	</tr>
+	    </tbody>
+	  </table>
+	</div>
+</form>
+
+	<div class="div_result_title">
+		<table class="tb_title">
+			<tbody>
+				<tr class="tr_caption">
+					<td class="td_caption_mark">
+						<img src="../../../resources/images/m_nav_dian.gif"></td>
+					<td class="td_caption">
+						业务字典类型
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="div_result" id="div_result">    
+		<table id="tresult" class="pg_result">
+			<tr class="pg_result_head">
+				<td width="50%">
+					<table id="tresult" class="pg_result">
+						<tr class="pg_result_head">
+							<td width="40%">&nbsp;业务字典类型&nbsp;</td>
+							<td width="40%">&nbsp;类型名称&nbsp;</td>
+							<td width="20%">&nbsp;操作&nbsp;</td>	
+						</tr>
+						<tbody id="body_result1">		    	
+								<tr class="pg_result_content">		    			
+									<td align="left" nowrap>OA_COMMON_Department</td>
+									<td align="left" nowrap>部门</td>	
+									<td align="center" nowrap>
+										<img src="../../../resources/images/write.png" class="img_lookup" onClick="img_insert(this)"></img>
+										<img src="../../../resources/images/img_sub.gif" class="img_lookup" onClick="img_delete1(this)"></img>
+									</td>	
+								</tr>
+								<tr class="pg_result_content">		    			
+									<td align="left" nowrap>OA_COMMON_Position</td>
+									<td align="left" nowrap>职称</td>	
+									<td align="center" nowrap>
+										<img src="../../../resources/images/write.png" class="img_lookup" onClick="img_insert(this)"></img>
+										<img src="../../../resources/images/img_sub.gif" class="img_lookup" onClick="img_delete1(this)"></img>
+									</td>
+								</tr>
+								<tr class="pg_result_content">		    			
+									<td align="left" nowrap>OA_COMMON_Gender</td>
+									<td align="left" nowrap>性别</td>	
+									<td align="center" nowrap>
+										<img src="../../../resources/images/write.png" class="img_lookup" onClick="img_insert(this)"></img>
+										<img src="../../../resources/images/img_sub.gif" class="img_lookup" onClick="img_delete1(this)"></img>
+									</td>
+								</tr>
+								<tr class="pg_result_content">		    			
+									<td align="left" nowrap>OA_COMMON_Region</td>
+									<td align="left" nowrap>区域</td>	
+									<td align="center" nowrap>
+										<img src="../../../resources/images/write.png" class="img_lookup" onClick="img_insert(this)"></img>
+										<img src="../../../resources/images/img_sub.gif" class="img_lookup" onClick="img_delete1(this)"></img>
+									</td>
+								</tr>
+								<tr class="pg_result_content">		    			
+									<td align="left" nowrap>OA_COMMON_Month</td>
+									<td align="left" nowrap>月份</td>	
+									<td align="center" nowrap>
+										<img src="../../../resources/images/write.png" class="img_lookup" onClick="img_insert(this)"></img>
+										<img src="../../../resources/images/img_sub.gif" class="img_lookup" onClick="img_delete1(this)"></img>
+									</td>
+								</tr>
+								<tr class="pg_result_content">		    			
+									<td align="left" nowrap>OA_COMMON_Week</td>
+									<td align="left" nowrap>星期</td>	
+									<td align="center" nowrap>
+										<img src="../../../resources/images/write.png" class="img_lookup" onClick="img_insert(this)"></img>
+										<img src="../../../resources/images/img_sub.gif" class="img_lookup" onClick="img_delete1(this)"></img>
+									</td>
+								</tr>
+								<tr class="pg_result_content">		    			
+									<td align="left" nowrap>OA_Apply_ServerDir</td>
+									<td align="left" nowrap>文件服务器目录</td>	
+									<td align="center" nowrap>
+										<img src="../../../resources/images/write.png" class="img_lookup" onClick="img_insert(this)"></img>
+										<img src="../../../resources/images/img_sub.gif" class="img_lookup" onClick="img_delete1(this)"></img>
+									</td>
+								</tr>
+								<tr class="pg_result_content">		    			
+									<td align="left" nowrap>OA_PA001_Status</td>
+									<td align="left" nowrap>员工状态</td>	
+									<td align="center" nowrap>
+										<img src="../../../resources/images/write.png" class="img_lookup" onClick="img_insert(this)"></img>
+										<img src="../../../resources/images/img_sub.gif" class="img_lookup" onClick="img_delete1(this)"></img>
+									</td>
+								</tr>
+								<tr class="pg_result_content">		    			
+									<td align="left" nowrap>OA_PA003_Status</td>
+									<td align="left" nowrap>工作日状态</td>	
+									<td align="center" nowrap>
+										<img src="../../../resources/images/write.png" class="img_lookup" onClick="img_insert(this)"></img>
+										<img src="../../../resources/images/img_sub.gif" class="img_lookup" onClick="img_delete1(this)"></img>
+									</td>
+								</tr>		
+						</tbody>
+						<tfoot>
+							<tr class="pg_result_content">	
+								<td align="center" colspan="3">
+									<form action="pa001001page" id="pageform" name="pageform" method="post" >	
+										<input name="empname" type="hidden"  value="" />
+										<input name="entrytimestart" type="hidden"  value="" />
+										<input name="entrytimeend" type="hidden"  value="" />
+										<input name="status" type="hidden"  value="" />
+										<input name="orgcdid" type="hidden"  value="" />
+										<input name="depid" type="hidden"  value="" />
+										<input name="pageSize" type="hidden" value="10"/>
+										<input name="curPage" type="hidden" value="1"/>
+										<input name="totalPage" type="hidden" value="1"/>
+										<input name="firstPage" type="hidden" value="true"/>
+										<input name="lastPage" type="hidden" value="false"/>
+										<input name="totalRecord" type="hidden" value="9"/>	
+										<!--Start Page Infor-->	
+											<div class="div_page"> 
+												<script type="text/javascript">
+													var curPage = $('#pageform').find('input[name="curPage"]').val();
+													var totalPage = $('#pageform').find('input[name="totalPage"]').val();
+													var firstPage = $('#pageform').find('input[name="firstPage"]').val();
+													var lastPage = $('#pageform').find('input[name="lastPage"]').val();
+													pagination("page", "pa001001page","pageform",curPage,totalPage,firstPage,lastPage);
+												</script>&nbsp;<img src="../../../resources/images/img_add.gif" class="img_lookup" onClick="img_insert1()"/>
+												<img src="../../../resources/images/img_save.gif" class="img_lookup" />
+												<img src="../../../resources/images/img_refresh.gif" class="img_lookup" />
+											</div>	
+										<!--End Page Infor-->
+									</form>
+								</td>
+							</tr>		
+						</tfoot>
+			  		</table>					
+	  			</td>
+				<td>
+					<table id="tresult" class="pg_result">	
+						<tr class="pg_result_content">		    			
+							<td class="td_key" width="35%" nowrap><label class="message">类型代码</label></td>
+							<td class="td_value" colspan="3"><input name="empname2" class="input_txt" value="OA_COMMON_Department" maxlength="50" /></td>
+						</tr>
+						<tr class="pg_result_content">		    			
+							<td class="td_key" width="35%" nowrap><label class="message">类型名称</label></td>
+							<td class="td_value" colspan="3">
+								<input name="empname" class="input_txt" value="部门" maxlength="20" />
+							</td>	
+						</tr>
+						<tr class="pg_result_head">
+							<td width="35%">&nbsp;类型项代码&nbsp;</td>
+							<td width="35%">&nbsp;类型项名称&nbsp;</td>
+							<td width="20%">&nbsp;排序&nbsp;</td>
+							<td width="10%">&nbsp;操作&nbsp;</td>	
+						</tr>
+						<tbody id="body_result2">		    	
+								<tr class="pg_result_content">		    			
+									<td align="left" nowrap><input name="empname" class="input_txt" value="0" maxlength="20" /></td>
+									<td align="left" nowrap><input name="empname" class="input_txt" value="总经办" maxlength="20" /></td>	
+									<td align="left" nowrap><input name="empname" class="input_small" value="1" maxlength="20" /></td>
+									<td align="center" nowrap>
+										<img src="../../../resources/images/img_sub.gif" class="img_lookup" onClick="img_delete(this)"></img>
+									</td>	
+								</tr>
+								<tr class="pg_result_content">		    			
+									<td align="left" nowrap><input name="empname" class="input_txt" value="1" maxlength="20" /></td>
+									<td align="left" nowrap><input name="empname" class="input_txt" value="管理部" maxlength="20" /></td>	
+									<td align="left" nowrap><input name="empname" class="input_small" value="2" maxlength="20" /></td>
+									<td align="center" nowrap>
+										<img src="../../../resources/images/img_sub.gif" class="img_lookup" onClick="img_delete(this)"></img>
+									</td>	
+								</tr>
+								<tr class="pg_result_content">		    			
+									<td align="left" nowrap><input name="empname" class="input_txt" value="2" maxlength="20" /></td>
+									<td align="left" nowrap><input name="empname" class="input_txt" value="中台/审查部" maxlength="20" /></td>	
+									<td align="left" nowrap><input name="empname" class="input_small" value="3" maxlength="20" /></td>
+									<td align="center" nowrap>
+										<img src="../../../resources/images/img_sub.gif" class="img_lookup" onClick="img_delete(this)"></img>
+									</td>	
+								</tr>
+								<tr class="pg_result_content">		    			
+									<td align="left" nowrap><input name="empname" class="input_txt" value="3" maxlength="20" /></td>
+									<td align="left" nowrap><input name="empname" class="input_txt" value="业务部门" maxlength="20" /></td>	
+									<td align="left" nowrap><input name="empname" class="input_small" value="4" maxlength="20" /></td>
+									<td align="center" nowrap>
+										<img src="../../../resources/images/img_sub.gif" class="img_lookup" onClick="img_delete(this)"></img>
+									</td>	
+								</tr>
+								<tr class="pg_result_content">		    			
+									<td align="left" nowrap><input name="empname" class="input_txt" value="4" maxlength="20" /></td>
+									<td align="left" nowrap><input name="empname" class="input_txt" value="IT" maxlength="20" /></td>	
+									<td align="left" nowrap><input name="empname" class="input_small" value="5" maxlength="20" /></td>
+									<td align="center" nowrap>
+										<img src="../../../resources/images/img_sub.gif" class="img_lookup" onClick="img_delete(this)"></img>
+									</td>	
+								</tr>								
+						</tbody>
+						<tfoot>
+							<tr class="pg_result_content">	
+								<td align="center" colspan="4">
+									<img src="../../../resources/images/img_add.gif" class="img_lookup" onClick="img_insert2()"/>
+									<img src="../../../resources/images/img_save.gif" class="img_lookup" />
+									<img src="../../../resources/images/img_refresh.gif" class="img_lookup" />
+								</td>
+							</tr>
+						</tfoot>
+			  		</table>
+				</td>
+			</tr>
+	  </table> 
+	</div>
+
+
+
+<form action="pa001001view" id="viewForm" name="viewForm" method="post">
+	
+	<input name="empname" type="hidden"  value="" />
+	<input name="entrytimestart" type="hidden"  value="" />
+	<input name="entrytimeend" type="hidden"  value="" />
+	<input name="status" type="hidden"  value="" />
+	<input name="orgcdid" type="hidden"  value="" />
+	<input name="depid" type="hidden"  value="" />
+		
+	<input name="empid" type="hidden"  />
+</form>
+
+</body>
+</html>

@@ -1,0 +1,308 @@
+
+<html>
+<head>
+	<title>OA系统</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<script type="text/javascript">
+		var contextPath = "/OASystem";
+		var EOSDEBUG = true;
+		var FINAL_PANEL_HEIGHT = 22;
+		
+		var IFRAME_MODIFY_HEIGHE = 35;
+		
+		var TREE_MODIFY_HEIGHT = 22;
+	</script>
+	<link  rel="stylesheet" type="text/css" href="../../../resources/css/style.css"/>
+	<link  rel="stylesheet" type="text/css" href="../../../resources/css/main.css"/>
+	<link  rel="stylesheet" type="text/css" href="../../../resources/css/home.css"/>
+	<link  rel="stylesheet" type="text/css" href="../../../resources/css/tab_style.css"/>
+	<link  rel="stylesheet" type="text/css" href="../../../resources/css/autovalidate.css"/>
+	<link  rel="stylesheet" type="text/css" href="../../../resources/css/simpletooltip.css"/>
+	<script type="text/javascript" src="../../../resources/js/jquery-1.4.4.min.js"></script>
+	<script type="text/javascript" src="../../../resources/js/jquery.numberFormat.js"></script>
+	<script type="text/javascript" src="../../../resources/js/jquery.validate.js"></script>
+	<script type="text/javascript" src="../../../resources/js/jquery.singlevalidate.js"></script>
+	<script type="text/javascript" src="../../../resources/js/jquery.autovalidate.js"></script>
+	<script type="text/javascript" src="../../../resources/js/common_busi.js"></script>
+	<script type="text/javascript" src="../../../resources/js/common_init.js"></script>
+	<script type="text/javascript" src="../../../resources/js/messages.js"></script>
+	<script type="text/javascript" src="../../../resources/js/pagination.js"></script>
+	<script type="text/javascript" src="../../../resources/My97DatePicker/WdatePicker.js"></script>
+
+
+<script type="text/javascript">
+/*
+*名       称: btn_search()
+*输入参数: 无
+*输出参数: 无
+*机       能: 查询
+*创 建  者: yuliang          
+*创建时间: 2015-09-14
+*更 新  者: 
+*更新时间: 
+*/
+function btn_search() {
+	c_ShowProgressBar(); 
+	window.location.href="pd004001List.htm";
+}
+/*
+*名       称: link_view( id)
+*输入参数: 无
+*输出参数: 无
+*机       能: Link到明细
+*创 建  者: yuliang          
+*创建时间: 2015-09-14
+*更 新  者: 
+*更新时间: 
+*/
+function link_view( obj){
+	window.location.href="pd004002A1Detail.htm";
+}
+/*
+*名       称: btn_check()
+*输入参数: 无
+*输出参数: 无
+*机       能: 审批
+*创 建  者: yuliang          
+*创建时间: 2015-12-09
+*更 新  者: 
+*更新时间: 
+*/
+function btn_check(){
+	window.location.href="pd004002A1Update.htm";
+}
+/*
+*名       称: btn_reset()
+*输入参数: 无
+*输出参数: 无
+*机       能: 清空
+*创 建  者: yuliang          
+*创建时间: 2015-09-14
+*更 新  者: 
+*更新时间: 
+*/
+function btn_reset() {
+	if ( !window.confirm( Message.getString("MSG_IC_COMM_0021"))) 
+		return;
+	//alert($("#queryForm").find("input[type='text']").eq(0).val());
+	$("#queryForm").find("input[type='text']").val('');
+	$("#queryForm").find("select").each(function(i,n){
+		$(n).val('');
+	});
+}
+$(document).ready(function(){
+	$('input[type="radio"]').click(function(){
+		var statusValue = $(this).parent().parent().find('input[name="status"]').val();
+		if(statusValue!="待总经理审批")
+		{
+			$('input[name="edit"]').attr("disabled",true);
+		}else{
+			$('input[name="edit"]').attr("disabled",false);
+		}
+	});
+});
+</script>
+</head>
+<body>
+<form id="queryForm" action="" method="post" > 
+	<div class="div_navi"><span><img src="../../../resources/images/home.png">&nbsp;您当前的位置：审核管理&nbsp;&gt;&nbsp;总经理审核&nbsp;&gt;&nbsp;总经理审核一览</span></div>
+	<div class="div_search_title">
+		<table class="tb_title">
+			<tbody>
+				<tr class="tr_caption">
+					<td class="td_caption_mark"><img src="../../../resources/images/m_nav_dian.gif"></img>
+					<td class="td_caption">查询条件</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="div_search_content">
+	  <table class="tb_search check_specialchar">
+	    <tbody>
+			<tr>
+				<td class="td_key" width="8%">
+					<label class="message">申请单号</label>
+				</td>
+				<td class="td_value" width="26%">
+					<input name="empname" class="input_txt" value="" maxlength="16"/>
+				</td>
+				<td class="td_key" width="8%" nowrap><label class="message">申请单</label></td>
+				<td class="td_value" width="26%">
+					<select id='orgcdid' name= 'orgcdid' class='input_select' >
+						<option value=''>全部</option>
+						<option value='A1'>A1-休假申请</option>
+						<option value='A2'>A2-休假取消申请</option>
+						<option value='A3'>A3-加班申请</option>
+						<option value='A4'>A4-加班确认申请</option>
+						<option value='A5'>A5-出差申请</option>
+						<option value='A6'>A6-出差结算申请</option>
+					</select>
+				</td>
+				<td class="td_key" width="8%" nowrap><label class="message">状态</label></td>					
+				<td class="td_value" >
+					<select id='depid' name= 'depid' class='input_select' >
+						<option value=''>全部</option>
+						<option value='0'>已驳回</option>
+						<option value='4' selected="selected">待总经理审批</option>
+						<option value='5'>待人事归档</option>
+						<option value='6'>已归档</option>
+						
+					</select>
+				</td>
+			</tr>			 
+			<tr>
+				<td colspan="6" align="right">					
+					<input name="search" id="search" type="button" class="btn" value="查&nbsp;询" onClick="btn_search();"/>
+					<input name="button" id="reset" type="button" class="btn" value="清&nbsp;空" onClick="btn_reset();">
+				</td>
+	      	</tr>
+	    </tbody>
+	  </table>
+	</div>
+</form>
+
+	<div class="div_result_title">
+		<table class="tb_title">
+			<tbody>
+				<tr class="tr_caption">
+					<td class="td_caption_mark">
+						<img src="../../../resources/images/m_nav_dian.gif"></td>
+					<td class="td_caption">
+						查询结果
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="div_result" id="div_result">  
+		<table id="tresult" class="pg_result">
+		    <tr class="pg_result_head">
+				<td width="3%"></td>
+				<td width="3%">&nbsp;序号&nbsp;</td>
+				<td width="15%" nowrap>&nbsp;申请单号&nbsp;</td>		
+				<td width="15%" nowrap>&nbsp;申请类型&nbsp;</td>
+				<td width="15%" nowrap>&nbsp;申请人&nbsp;</td>
+				<td width="15%" nowrap>&nbsp;状态&nbsp;</td>
+				<td width="15%" nowrap>&nbsp;处理人&nbsp;</td>
+				<td nowrap >&nbsp;处理日期&nbsp;</td>
+			</tr>
+		    <tbody id="body_result">		    	
+				<tr class="pg_result_content">
+					<td align="center" nowrap><input name="rad" type="radio" /></td>
+					<td align="center" nowrap>1</td>
+					<td align="left" nowrap>
+						<a href="#" onClick="javascript:link_view(this);return false;">A1-201512090001</a>
+						<input name="status" type="hidden" value="待总经理审批" />
+					</td>
+					<td align="center" nowrap>A1-休假申请</td>
+					<td align="left" nowrap>薛宝庆</td>
+					<td align="center" nowrap>待总经理审批</td>
+					<td align="left" nowrap>薛宝庆</td>	
+					<td align="center" nowrap>2015-12-09</td>			
+				</tr>
+				<tr class="pg_result_content">
+					<td align="center" nowrap><input name="rad" type="radio" /></td>
+					<td align="center" nowrap>2</td>
+					<td align="left" nowrap>
+						<a href="#" onClick="javascript:link_view(this);return false;">A3-201512040001</a>
+						<input name="status" type="hidden" value="待副总审批" />
+					</td>
+					<td align="center" nowrap>A3-加班申请</td>
+					<td align="left" nowrap>薛宝庆</td>
+					<td align="center" nowrap>待副总审批</td>
+					<td align="left" nowrap>薛宝庆</td>	
+					<td align="center" nowrap>2015-12-04</td>			
+				</tr>
+				<tr class="pg_result_content">
+					<td align="center" nowrap><input name="rad" type="radio" /></td>
+					<td align="center" nowrap>3</td>
+					<td align="left" nowrap>
+						<a href="#" onClick="javascript:link_view(this);return false;">A5-201512030001</a>
+						<input name="status" type="hidden" value="待副总审批" />
+					</td>
+					<td align="center" nowrap>A5-出差申请</td>
+					<td align="left" nowrap>薛宝庆</td>
+					<td align="center" nowrap>待副总审批</td>
+					<td align="left" nowrap>薛宝庆</td>	
+					<td align="center" nowrap>2015-12-03</td>			
+				</tr>
+				<tr class="pg_result_content">
+					<td align="center" nowrap><input name="rad" type="radio" /></td>
+					<td align="center" nowrap>4</td>
+					<td align="left" nowrap>
+						<a href="#" onClick="javascript:link_view(this);return false;">A1-201512020001</a>
+						<input name="status" type="hidden" value="待人事审批" />
+					</td>
+					<td align="center" nowrap>A1-休假申请</td>
+					<td align="left" nowrap>薛宝庆</td>
+					<td align="center" nowrap>待人事审批</td>
+					<td align="left" nowrap>薛宝庆</td>	
+					<td align="center" nowrap>2015-12-02</td>			
+				</tr>
+				<tr class="pg_result_content">
+					<td align="center" nowrap><input name="rad" type="radio" /></td>
+					<td align="center" nowrap>5</td>
+					<td align="left" nowrap>
+						<a href="#" onClick="javascript:link_view(this);return false;">A1-201512010001</a>
+						<input name="status" type="hidden" value="待人事归档" />
+					</td>
+					<td align="center" nowrap>A1-休假申请</td>
+					<td align="left" nowrap>薛宝庆</td>
+					<td align="center" nowrap>待人事归档</td>
+					<td align="left" nowrap>薛宝庆</td>	
+					<td align="center" nowrap>2015-12-01</td>			
+				</tr>
+		    </tbody>
+		</table>
+	</div>
+	<div class="div_result_button">
+		<table cellPadding="0" cellSpacing="0" align="center" border="0"  width="100%">
+			<tr>
+				<td>
+				 <input name="edit" id="edit" type="button" class="btn" onClick="btn_check()" onMouseOver="this.className='btn_mouseover'"  onMouseOut="this.className='btn'" value="审&nbsp;核"> 
+				</td>
+			</tr>
+		</table>
+	</div>
+
+<form action="pa001001page" id="pageform" name="pageform" method="post" >	
+	<input name="empname" type="hidden"  value="" />
+	<input name="entrytimestart" type="hidden"  value="" />
+	<input name="entrytimeend" type="hidden"  value="" />
+	<input name="status" type="hidden"  value="" />
+	<input name="orgcdid" type="hidden"  value="" />
+	<input name="depid" type="hidden"  value="" />
+	<input name="pageSize" type="hidden" value="10"/>
+	<input name="curPage" type="hidden" value="1"/>
+	<input name="totalPage" type="hidden" value="1"/>
+	<input name="firstPage" type="hidden" value="true"/>
+	<input name="lastPage" type="hidden" value="false"/>
+	<input name="totalRecord" type="hidden" value="5"/>	
+	<!--Start Page Infor-->	
+	<div class="div_page"> 
+		<script type="text/javascript">
+			var curPage = $('#pageform').find('input[name="curPage"]').val();
+			var totalPage = $('#pageform').find('input[name="totalPage"]').val();
+			var firstPage = $('#pageform').find('input[name="firstPage"]').val();
+			var lastPage = $('#pageform').find('input[name="lastPage"]').val();
+			pagination("page", "pa001001page","pageform",curPage,totalPage,firstPage,lastPage);
+		</script>
+	</div>	
+	<!--End Page Infor-->
+</form>
+
+<form action="pa001001view" id="viewForm" name="viewForm" method="post">
+	
+	<input name="empname" type="hidden"  value="" />
+	<input name="entrytimestart" type="hidden"  value="" />
+	<input name="entrytimeend" type="hidden"  value="" />
+	<input name="status" type="hidden"  value="" />
+	<input name="orgcdid" type="hidden"  value="" />
+	<input name="depid" type="hidden"  value="" />
+		
+	<input name="empid" type="hidden"  />
+</form>
+
+</body>
+</html>

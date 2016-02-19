@@ -1,0 +1,271 @@
+
+
+
+
+ 
+
+
+
+<html>
+<head>
+	<title>OA系统</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<script type="text/javascript">
+		var contextPath = "/OASystem";
+		var EOSDEBUG = true;
+		var FINAL_PANEL_HEIGHT = 22;
+		
+		var IFRAME_MODIFY_HEIGHE = 35;
+		
+		var TREE_MODIFY_HEIGHT = 22;
+	</script>
+	<link  rel="stylesheet" type="text/css" href="../../../resources/css/style.css"/>
+	<link  rel="stylesheet" type="text/css" href="../../../resources/css/main.css"/>
+	<link  rel="stylesheet" type="text/css" href="../../../resources/css/home.css"/>
+	<link  rel="stylesheet" type="text/css" href="../../../resources/css/tab_style.css"/>
+	<link  rel="stylesheet" type="text/css" href="../../../resources/css/autovalidate.css"/>
+	<link  rel="stylesheet" type="text/css" href="../../../resources/css/simpletooltip.css"/>
+	<script type="text/javascript" src="../../../resources/js/jquery-1.4.4.min.js"></script>
+	<script type="text/javascript" src="../../../resources/js/jquery.numberFormat.js"></script>
+	<script type="text/javascript" src="../../../resources/js/jquery.validate.js"></script>
+	<script type="text/javascript" src="../../../resources/js/jquery.singlevalidate.js"></script>
+	<script type="text/javascript" src="../../../resources/js/jquery.autovalidate.js"></script>
+	<script type="text/javascript" src="../../../resources/js/common_busi.js"></script>
+	<script type="text/javascript" src="../../../resources/js/common_init.js"></script>
+	<script type="text/javascript" src="../../../resources/js/messages.js"></script>
+	<script type="text/javascript" src="../../../resources/js/pagination.js"></script>
+	<script type="text/javascript" src="../../../resources/My97DatePicker/WdatePicker.js"></script>
+	<script type="text/javascript" src="../../../resources/My97DatePicker/WdatePicker.js"></script>
+
+<script type="text/javascript">
+/*
+*名       称: btn_update()
+*输入参数: 无
+*输出参数: 无
+*机       能: 保存
+*创 建  者: yuliang          
+*创建时间: 2015-09-14
+*更 新  者: 
+*更新时间: 
+*/
+function btn_update() {
+	if ( !$.fn.autovalidateForm("updateForm") ){
+		return;
+	}
+	var dailystarthm = $("#dailystarthm").val();
+	var dailyendhm = $("#dailyendhm").val();	
+	var eventstart = $("#eventstart").val();
+	var eventend = $("#eventend").val();
+	if(!checkTimeBgnEndDate( eventstart, dailystarthm, dailyendhm)){
+		alert( Message.getString( "MSG_COMM_0012", "日期和时间"));
+		return;
+	}	
+	if ( !window.confirm( Message.getString("MSG_IC_COMM_0011"))) 
+		return;
+	c_ShowProgressBar(); 
+	window.location.href="pb001001List.htm";	
+}
+/*
+*名       称: btn_cancel()
+*输入参数: 无
+*输出参数: 无
+*机       能: 取消
+*创 建  者: yuliang          
+*创建时间: 2015-10-14
+*更 新  者: 
+*更新时间: 
+*/
+function btn_cancel() {
+	if ( !window.confirm( Message.getString("MSG_IC_COMM_0020"))) 
+		return;
+	c_ShowProgressBar(); 
+	window.location.href="pb001001List.htm";	
+}
+/*
+*名       称: btn_back()
+*输入参数: 无
+*输出参数: 无
+*机       能: 返回
+*创 建  者: yuliang          
+*创建时间: 2015-09-16
+*更 新  者: 
+*更新时间: 
+*/
+function btn_back() {	
+	window.location.href="pb001001List.htm";	
+}
+var currentdate = '2015-10-12';
+function select_changeDaily() {
+	var dailycycle = $("#dailycycle").val();
+	if(dailycycle == 3){
+		//class="input_date Wdate" onclick="WdatePicker()"
+		//class="input_date dis_input" 
+		$('#eventstart').val(currentdate);
+		$('#eventend').val(currentdate);	
+		$('#eventstart').removeAttr("class");
+		$('#eventstart').attr("class","input_date Wdate");
+		$("#eventstart").click(function(){WdatePicker();});
+		$('#eventend').removeAttr("class");
+		$('#eventend').attr("class","input_date Wdate");
+		$("#eventend").click(function(){WdatePicker();});
+	}else {		
+		$('#eventstart').val(currentdate);
+		$('#eventend').val(currentdate);		
+		$('#eventstart').removeAttr("class");
+		$("#eventstart").unbind("click");
+		$('#eventstart').attr("class","input_date dis_input");
+		$('#eventend').removeAttr("class");
+		$("#eventend").unbind("click");
+		$('#eventend').attr("class","input_date dis_input");	
+	}	
+}
+function btn_deviceOrderSearch() {
+	window.showModalDialog('pb001005DeviceOrderList.htm',this,'dialogWidth=700px;dialogHeight=500px');
+}
+function btn_deviceListSearch() {
+	var ret = window.showModalDialog('pb001006DeviceList.htm',this,'dialogWidth=700px;dialogHeight=500px');
+	document.getElementById("device").value = ret[0];
+}
+function btn_empListSearch() {
+	var ret = window.showModalDialog('pb001007EmpList.htm',this,'dialogWidth=700px;dialogHeight=500px');
+	document.getElementById("joiner").value = ret[0];
+}
+/*
+*名       称: btn_clear(obj)
+*输入参数: obj
+*输出参数: 无
+*机       能: 清空
+*创 建  者: yuliang          
+*创建时间: 2015-12-07
+*更 新  者: 
+*更新时间: 
+*/
+function btn_clear(obj) {
+	if ( !window.confirm( Message.getString("MSG_IC_COMM_0021"))) 
+		return;
+	$(obj).parent().find(":text").each(function(i,n){
+		$(n).val('');
+	});
+	$(obj).parent().find(":hidden").each(function(i,n){
+		$(n).val('');
+	});
+	$(obj).parent().find("textarea").each(function(i,n){
+		$(n).val('');
+	});
+}
+</script>
+</head>
+<body>
+<form id="updateForm" action="" method="post">  
+	<input name="empid" type="hidden"  value="201510081618593Tmi518Bt5GHDr2o"/>
+	<input name="pa001001searchcommand.empname" type="hidden"  value="" />
+	<input name="pa001001searchcommand.entrytimestart" type="hidden"  value="" />
+	<input name="pa001001searchcommand.entrytimeend" type="hidden"  value="" />
+	<input name="pa001001searchcommand.status" type="hidden"  value="" />
+	<input name="pa001001searchcommand.orgcdid" type="hidden"  value="" />
+	<input name="pa001001searchcommand.depid" type="hidden"  value="" />
+	<div class="div_navi"><span><img src="../../../resources/images/home.png">&nbsp;您当前的位置：日程管理&nbsp;&gt;&nbsp;日程安排&nbsp;&gt;&nbsp;日程安排编辑</span></div>
+	<div class="div_search_title">
+		<table class="tb_title">
+			<tbody>
+				<tr class="tr_caption">
+					<td class="td_caption_mark">
+						<img src="../../../resources/images/m_nav_dian.gif"></img>
+					<td class="td_caption">
+						基本信息
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="div_search_content">
+	  <table class="tb_search">
+	    <tbody>
+			<tr>
+				<td class="td_key" width="4%"><label class="message">发起人</label></td>
+				<td class="td_value">
+					<input id="skypenum" name="skypenum" class="input_bigger dis_input" value="薛寶慶 2015-10-12 16:23:44" readonly="readonly"/>
+				</td>
+			</tr>
+			<tr>
+				<td class="td_key" width="4%"><label class="message">更新人</label></td>
+				<td class="td_value">
+					<input id="skypenum" name="skypenum" class="input_bigger dis_input" value="薛寶慶 2015-10-12 16:23:44" readonly="readonly"/>
+				</td>
+			</tr>
+			<tr>
+				<td class="td_key" width="4%">
+					<font color="#ff0000">*</font><label class="message">定期模式</label>
+				</td>
+				<td class="td_value" >
+					<select id='dailycycle' name= 'dailycycle' class='input_select' title='required' onchange="select_changeDaily()"><option value=''>请选择</option>
+					<option value='0' selected>日程</option><option value='1'>周程</option><option value='2'>月程</option><option value='3'>其他</option></select>
+				</td>
+			</tr>
+			<tr>
+				<td class="td_key" width="4%">
+					<font color="#ff0000">*</font><label class="message">事件类型</label>
+				</td>
+				<td class="td_value" >
+					<select id='orgcdid' name= 'orgcdid' class='input_select' title='required' ><option value=''>请选择</option><option value='1' selected>个人</option><option value='2'>工作</option><option value='3'>会议</option><option value='4'>外出</option><option value='4'>来访</option><option value='4'>请假</option></select>
+				</td>
+			</tr>
+			<tr>
+				<td class="td_key" width="4%"><font color="#ff0000">*</font><label class="message">日期和时间</label></td>
+				<td class="td_value">
+					<input id="eventstart" name="eventstart" class="input_date dis_input" value="2015-10-12" readonly="readonly"/>&nbsp;<select id='dailystarthm' name= 'dailystarthm' class='input_select_small' ><option value='00:00'>请选择</option><option value='00:00'>00:00</option><option value='00:30'>00:30</option><option value='01:00'>01:00</option><option value='01:30'>01:30</option><option value='02:00'>02:00</option><option value='02:30'>02:30</option><option value='03:00'>03:00</option><option value='03:30'>03:30</option><option value='04:00'>04:00</option><option value='04:30'>04:30</option><option value='05:00'>05:00</option><option value='05:30'>05:30</option><option value='06:00'>06:00</option><option value='06:30'>06:30</option><option value='07:00'>07:00</option><option value='07:30'>07:30</option><option value='08:00'>08:00</option><option value='08:30'>08:30</option><option value='09:00'>09:00</option><option value='09:30'>09:30</option><option value='10:00'>10:00</option><option value='10:30'>10:30</option><option value='11:00'>11:00</option><option value='11:30'>11:30</option><option value='12:00'>12:00</option><option value='12:30'>12:30</option><option value='13:00'>13:00</option><option value='13:30'>13:30</option><option value='14:00'>14:00</option><option value='14:30'>14:30</option><option value='15:00'>15:00</option><option value='15:30'>15:30</option><option value='16:00'>16:00</option><option value='16:30'>16:30</option><option value='17:00'>17:00</option><option value='17:30'>17:30</option><option value='18:00'>18:00</option><option value='18:30'>18:30</option><option value='19:00'>19:00</option><option value='19:30'>19:30</option><option value='20:00'>20:00</option><option value='20:30'>20:30</option><option value='21:00'>21:00</option><option value='21:30'>21:30</option><option value='22:00'>22:00</option><option value='22:30'>22:30</option><option value='23:00'>23:00</option><option value='23:30'>23:30</option></select>&nbsp;~
+					<input id="eventend" name="eventend" class="input_date dis_input" value="2015-10-12" readonly="readonly"/>&nbsp;<select id='dailyendhm' name= 'dailyendhm' class='input_select_small' ><option value='00:00'>请选择</option><option value='00:00'>00:00</option><option value='00:30'>00:30</option><option value='01:00'>01:00</option><option value='01:30'>01:30</option><option value='02:00'>02:00</option><option value='02:30'>02:30</option><option value='03:00'>03:00</option><option value='03:30'>03:30</option><option value='04:00'>04:00</option><option value='04:30'>04:30</option><option value='05:00'>05:00</option><option value='05:30'>05:30</option><option value='06:00'>06:00</option><option value='06:30'>06:30</option><option value='07:00'>07:00</option><option value='07:30'>07:30</option><option value='08:00'>08:00</option><option value='08:30'>08:30</option><option value='09:00'>09:00</option><option value='09:30'>09:30</option><option value='10:00'>10:00</option><option value='10:30'>10:30</option><option value='11:00'>11:00</option><option value='11:30'>11:30</option><option value='12:00'>12:00</option><option value='12:30'>12:30</option><option value='13:00'>13:00</option><option value='13:30'>13:30</option><option value='14:00'>14:00</option><option value='14:30'>14:30</option><option value='15:00'>15:00</option><option value='15:30'>15:30</option><option value='16:00'>16:00</option><option value='16:30'>16:30</option><option value='17:00'>17:00</option><option value='17:30'>17:30</option><option value='18:00'>18:00</option><option value='18:30'>18:30</option><option value='19:00'>19:00</option><option value='19:30'>19:30</option><option value='20:00'>20:00</option><option value='20:30'>20:30</option><option value='21:00'>21:00</option><option value='21:30'>21:30</option><option value='22:00'>22:00</option><option value='22:30'>22:30</option><option value='23:00'>23:00</option><option value='23:30'>23:30</option></select>
+				</td>
+			</td>
+			</tr>
+			<tr>
+				<td class="td_key" width="4%">
+					<font color="#ff0000">*</font><label class="message">标题</label>
+				</td>
+				<td class="td_value">
+					<input name="empname" class="input_bigger1" value="客户刘经理拜访" />
+				</td>
+			</tr>			
+			<tr>
+				<td class="td_key" width="4%">
+					<label class="message">设备</label>
+				</td>
+				<td class="td_value" >
+					<input id="device" name="device" class="input_bigger1" value="会议室1,..." readonly="readonly"/>
+					<input name="search" id="search" type="button" class="btn" value="选&nbsp;择" onClick="btn_deviceListSearch();"/>
+					<input name="button" id="reset" type="button" class="btn" value="设备空闲" onClick="btn_deviceOrderSearch();">
+					<input name="reset" id="reset" type="button" class="btn" value="清&nbsp;空" onclick="btn_clear(this)">
+				</td>
+			</tr>		
+			<tr>
+				<td class="td_key" width="4%">
+					<label class="message">内容</label>
+				</td>
+				<td class="td_value" >
+					<textarea id="options"  class="input_memo_long" ></textarea>	
+				</td>
+			</tr>
+			<tr>
+				<td class="td_key" width="4%">
+					<label class="message">参加者</label>
+				</td>
+				<td class="td_value" >
+					<textarea id="joiner"  class="input_memo_long" readonly="readonly">曹亦然,曹斌,任海龍,韋世昌,許明波</textarea>
+					<input name="search" id="search" type="button" class="btn" value="选&nbsp;择" onClick="btn_empListSearch();"/>
+					<input name="reset" id="reset" type="button" class="btn" value="清&nbsp;空" onclick="btn_clear(this)">
+				</td>
+			</tr>			
+			<tr>
+				<td colspan="2" align="right">					
+					<input name="search" id="search" type="button" class="btn" value="修&nbsp;改" onClick="btn_update();"/>
+					<input name="cancel" id="cancel" type="button" class="btn" value="取&nbsp;消" onClick="btn_cancel();" />
+					<input name="back"  id="back" type="button" class="btn" value="返&nbsp;回" onClick="btn_back();" />
+				</td>
+	      	</tr>			
+	    </tbody>
+	  </table>
+	</div
+</form>
+</body>
+</html>

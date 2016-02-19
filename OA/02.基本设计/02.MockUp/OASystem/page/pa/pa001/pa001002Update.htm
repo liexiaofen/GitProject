@@ -1,0 +1,315 @@
+
+
+
+
+ 
+
+
+
+<html>
+<head>
+	<title>OA系统</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<script type="text/javascript">
+		var contextPath = "/OASystem";
+		var EOSDEBUG = true;
+		var FINAL_PANEL_HEIGHT = 22;
+		
+		var IFRAME_MODIFY_HEIGHE = 35;
+		
+		var TREE_MODIFY_HEIGHT = 22;
+	</script>
+	<link  rel="stylesheet" type="text/css" href="../../../resources/css/style.css"/>
+	<link  rel="stylesheet" type="text/css" href="../../../resources/css/main.css"/>
+	<link  rel="stylesheet" type="text/css" href="../../../resources/css/home.css"/>
+	<link  rel="stylesheet" type="text/css" href="../../../resources/css/tab_style.css"/>
+	<link  rel="stylesheet" type="text/css" href="../../../resources/css/autovalidate.css"/>
+	<link  rel="stylesheet" type="text/css" href="../../../resources/css/simpletooltip.css"/>
+	<script type="text/javascript" src="../../../resources/js/jquery-1.4.4.min.js"></script>
+	<script type="text/javascript" src="../../../resources/js/jquery.numberFormat.js"></script>
+	<script type="text/javascript" src="../../../resources/js/jquery.validate.js"></script>
+	<script type="text/javascript" src="../../../resources/js/jquery.singlevalidate.js"></script>
+	<script type="text/javascript" src="../../../resources/js/jquery.autovalidate.js"></script>
+	<script type="text/javascript" src="../../../resources/js/common_busi.js"></script>
+	<script type="text/javascript" src="../../../resources/js/common_init.js"></script>
+	<script type="text/javascript" src="../../../resources/js/messages.js"></script>
+	<script type="text/javascript" src="../../../resources/js/pagination.js"></script>
+	<script type="text/javascript" src="../../../resources/My97DatePicker/WdatePicker.js"></script>
+
+<script type="text/javascript">
+/*
+*名       称: btn_update()
+*输入参数: 无
+*输出参数: 无
+*机       能: 保存
+*创 建  者: yuliang          
+*创建时间: 2015-09-14
+*更 新  者: 
+*更新时间: 
+*/
+function btn_update() {
+	
+	if ( !window.confirm( Message.getString("MSG_IC_COMM_0011"))) 
+		return;
+	c_ShowProgressBar(); 
+	window.location.href="pa001001List.htm";	
+}
+/*
+*名       称: btn_delete()
+*输入参数: 无
+*输出参数: 无
+*机       能: 删除
+*创 建  者: yuliang          
+*创建时间: 2015-10-14
+*更 新  者: 
+*更新时间: 
+*/
+function btn_delete() {
+	if ( !window.confirm( Message.getString("MSG_IC_COMM_0003"))) 
+		return;
+	c_ShowProgressBar(); 
+	window.location.href="pa001001List.htm";	
+}
+/*
+*名       称: btn_back()
+*输入参数: 无
+*输出参数: 无
+*机       能: 返回
+*创 建  者: yuliang          
+*创建时间: 2015-09-16
+*更 新  者: 
+*更新时间: 
+*/
+function btn_back() {	
+	window.location.href="pa001001List.htm";	
+}
+function btn_orgListSearch() {
+	var ret = window.showModalDialog('orgList.htm',this,'dialogWidth=700px;dialogHeight=500px');
+	if(ret){
+		if(ret[0]){	
+			document.getElementById("orgcddepposids").value = ret[1];			
+			var str = ret[0].split(",");
+			var text = '';
+			for(var i=0; i<str.length; i++){
+				text += str[i] + '<br/>';
+			}
+			$("#orgcddepposes").html(text);
+		}
+	}
+}
+/*
+*名       称: btn_roleListSearch()
+*输入参数: 无
+*输出参数: 无
+*机       能: 角色查询
+*创 建  者: yuliang          
+*创建时间: 2015-12-31
+*更 新  者: 
+*更新时间: 
+*/
+function btn_roleListSearch() {
+var ret = window.showModalDialog('roleList.htm',this,'dialogWidth=700px;dialogHeight=500px');
+	if(ret){
+		if(ret[0]){	
+			document.getElementById("roleids").value = ret[1];		
+			document.getElementById("roles").value = ret[0];	
+		}
+	}
+}
+/*
+*名       称: btn_clear(obj)
+*输入参数: obj
+*输出参数: 无
+*机       能: 清空
+*创 建  者: yuliang          
+*创建时间: 2015-12-07
+*更 新  者: 
+*更新时间: 
+*/
+function btn_clear(obj) {
+	if ( !window.confirm( Message.getString("MSG_IC_COMM_0021"))) 
+		return;
+	$(obj).parent().find(":text").each(function(i,n){
+		$(n).val('');
+	});
+	$(obj).parent().find(":hidden").each(function(i,n){
+		$(n).val('');
+	});
+	$(obj).parent().find("textarea").each(function(i,n){
+		$(n).val('');
+	});
+}
+</script>
+</head>
+<body>
+<form id="updateForm" action="" method="post">  
+	<input name="empid" type="hidden"  value="201510081618593Tmi518Bt5GHDr2o"/>
+	<input name="pa001001searchcommand.empname" type="hidden"  value="" />
+	<input name="pa001001searchcommand.entrytimestart" type="hidden"  value="" />
+	<input name="pa001001searchcommand.entrytimeend" type="hidden"  value="" />
+	<input name="pa001001searchcommand.status" type="hidden"  value="" />
+	<input name="pa001001searchcommand.orgcdid" type="hidden"  value="" />
+	<input name="pa001001searchcommand.depid" type="hidden"  value="" />
+	<div class="div_navi"><span><img src="../../../resources/images/home.png">&nbsp;您当前的位置：主表管理&nbsp;&gt;&nbsp;员工信息&nbsp;&gt;&nbsp;员工信息编辑</span></div>
+	<div class="div_search_title">
+		<table class="tb_title">
+			<tbody>
+				<tr class="tr_caption">
+					<td class="td_caption_mark">
+						<img src="../../../resources/images/m_nav_dian.gif"></img>
+					<td class="td_caption">
+						基本信息
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="div_search_content">
+	  <table class="tb_search">
+	    <tbody>
+			<tr>
+				<td class="td_key" width="8%">
+					<font color="#ff0000">*</font><label class="message">姓名</label>
+				</td>
+				<td class="td_value" width="26%">
+					<input name="empname" class="input_txt" value="薛寶慶" maxlength="20" title="required" />
+				</td>
+				<td class="td_key" width="8%">
+					<font color="#ff0000">*</font><label class="message">英文名</label>
+				</td>
+				<td class="td_value" width="26%">
+					<input id="empenname" name="empenname" class="input_txt" value="Baoqing Xue" maxlength="20"  title="required" />
+				</td>
+				<td class="td_key" width="8%">
+					<label class="message">分机</label>
+				</td>
+				<td class="td_value" width="26%">
+					<input name="extension" class="input_txt" value="8030" maxlength="20"  title='tel' />
+				</td>								
+			</tr>
+			<tr>
+				<td class="td_key" width="8%">
+					<label class="message">直线</label>
+				</td>
+				<td class="td_value">
+					<input name="straightline" class="input_txt" value="6079-8030" maxlength="20"  title="tel" />
+				</td>
+				<td class="td_key" width="8%"><label class="message">SKYPE號</label></td>
+				<td class="td_value"  width="26%">
+					<input id="skypenum" name="skypenum" class="input_txt" value="xuebaoqing59" maxlength="32"  title="ascii" />
+				</td>
+				<td class="td_key" width="8%">
+					<label class="message">国际电话</label>
+				</td>
+				<td class="td_value" width="26%">
+					<input name="internttel" class="input_txt" value="" maxlength="11"  title="mobile" />
+				</td>								
+			</tr>
+			<tr>
+				<td class="td_key" width="8%">
+					<label class="message">国内电话</label>
+				</td>
+				<td class="td_value" width="26%">
+					<input name="domestictel" class="input_txt" value="13916215936" maxlength="11"  title="mobile" />
+				</td>
+				<td class="td_key" width="8%">
+					<font color="#ff0000">*</font><label class="message">email</label>
+				</td>
+				<td class="td_value" width="26%">
+					<input id="email" name="email" class="input_txt" value="baoqingx@cmayg.com" maxlength="30"  title="required,email" />
+				</td>
+				<td class="td_key" width="8%">
+					<label class="message">身份证号</label></td>
+				<td class="td_value"  width="26%">
+					<input id="cardno" name="cardno" class="input_txt dis_input" value="321282199001010001" maxlength="18"  readonly="readonly"/>
+				</td>								
+			</tr>
+			<tr>							
+				<td class="td_key" width="8%">
+					<font color="#ff0000">*</font><label class="message">角色</label>
+				</td>
+				<td class="td_value" colspan="3">
+					<input id="roles" name="roles" class="input_bigger1" readonly="readonly" title='required' value="财务,系统管理员"/>
+					<input name="search" id="search" type="button" class="btn" value="选&nbsp;择" onClick="btn_roleListSearch()" />
+					<input name="reset" id="reset" type="button" class="btn" value="清&nbsp;空" onclick="btn_clear(this)">
+					<input id="roleids" name="roleids" type="hidden" />
+				</td>
+				<td class="td_key" width="8%">
+					<font color="#ff0000">*</font><label class="message">员工号</label>
+				</td>
+				<td class="td_value">
+					<input id="empno" name="empno" class="input_txt" value="1" maxlength="3"  title="required,intege1" />
+				</td>
+			</tr>
+			<tr>	
+				<td class="td_key" width="8%">
+					<font color="#ff0000">*</font><label class="message">入职时间</label></td>
+				<td class="td_value" width="26%">
+					<input id="entrytime"  name="entrytime" class="input_date Wdate" value="2015-10-01" readonly="readonly" onClick="WdatePicker()" title='required'/>
+				</td>
+				<td class="td_key" width="8%"><label class="message">状态</label></td>
+				<td class="td_value">
+					<select id='status' name= 'status' class='input_select' ><option value='0' selected='selected'>在职</option><option value='1'>离职</option></select>
+				</td>
+				<td class="td_key" width="8%">
+					<font color="#ff0000">*</font><label class="message">性别</label>
+				</td>
+				<td class="td_value">
+					<select id='sex' name= 'sex' class='input_select' title='required' ><option value=''>请选择</option><option value='m' selected='selected'>男</option><option value='f'>女</option></select>
+				</td>				
+			</tr>
+			<tr>
+				<td class="td_key" width="8%">
+					<font color="#ff0000">*</font><label class="message">机构</label>
+				</td>
+				<td class="td_value" colspan="5">
+					<textarea id="orgcddepposes" name="orgcddepposes"  class="input_memo_long" readonly="readonly" title='required'>上海 - 聯蔚:总经办:董事
+上海 - 坤燭:总经办:董事
+					</textarea>
+					<input name="search" id="search" type="button" class="btn" value="选&nbsp;择" onClick="btn_orgListSearch()" />
+					<input name="reset" id="reset" type="button" class="btn" value="清&nbsp;空" onclick="btn_clear(this)">
+					<input id="orgcddepposids" name="orgcddepposids" type="hidden" value="20151203103551f2a3Ga4HHlvd0180:0:0,20151203103207nY8O0cCFSV66a5hu:0:0,201512031034130420M96hs50g8KDT:0:0"/>
+					
+				</td>
+			
+			</tr>			
+	    </tbody>
+	  </table>
+	</div>
+	<div class="div_search_title">
+		<table class="tb_title">
+			<tbody>
+				<tr class="tr_caption">
+					<td class="td_caption_mark">
+						<img src="../../../resources/images/m_nav_dian.gif"></img>
+					<td class="td_caption">
+						操作员信息
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="div_search_content">
+	  <table class="tb_search">
+	    <tbody>
+			<tr>
+				<td class="td_key" width="8%">
+					<font color="#ff0000">*</font><label class="message">用户登录名</label>
+				</td>
+				<td class="td_value">
+					<input id="username" name="username" class="input_txt" value="XueBaoqing " maxlength="20"  title="required,ascii" />
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" align="right">					
+					<input name="search" id="search" type="button" class="btn" value="修&nbsp;改" onClick="btn_update();"/>
+					<input name="search" id="search" type="button" class="btn" value="删&nbsp;除" onClick="btn_delete();"/>
+					<input name="button" id="reset" type="button" class="btn" value="返&nbsp;回" onClick="btn_back();" />
+				</td>
+	      	</tr>
+	    </tbody>
+	  </table>
+	</div>
+</form>
+</body>
+</html>

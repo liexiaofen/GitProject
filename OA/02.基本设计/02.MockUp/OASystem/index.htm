@@ -1,0 +1,67 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<!-- saved from url=(0032)http://localhost:8080/OASystem/ -->
+<HTML><HEAD><META content="IE=8.0000" http-equiv="X-UA-Compatible">
+<TITLE>OA</TITLE>
+<META http-equiv=X-UA-Compatible content=IE=EmulateIE8>
+<META http-equiv=Content-Type content="text/html; charset=utf-8"><LINK 
+href="resources/css/login.css" rel=stylesheet type=text/css>
+<SCRIPT type=text/javascript>
+/*
+*名       称: btn_login()
+*输入参数: 无
+*输出参数: 无
+*机       能: 查询
+*创 建  者: yuliang          
+*创建时间: 2015-10-22
+*更 新  者: 
+*更新时间: 
+*/
+function btn_login() {
+	window.location.href="page/index.htm";
+}
+</SCRIPT>
+
+<META name=GENERATOR content="MSHTML 11.00.9600.18057"></HEAD>
+<BODY>
+	<DIV class=login>
+		<DIV class=login_logo></DIV>
+		<DIV class=login_boder>
+			<DIV class=login_padding>
+				<br/>
+				<br/>
+				<table>
+					<tr>
+						<td>用户名</td>
+						<td><input class="input_login input_txt2" id="username" type="text" /></td>
+					</tr>
+					<tr>
+						<td>密&nbsp;&nbsp;&nbsp;码</td>
+						<td><input name="userpwd" class="input_login" id="userpwd" type="password" /></td>
+					</tr>					
+					<tr>
+						<td>机&nbsp;&nbsp;&nbsp;构</td>
+						<td>
+							<select id="orgcdid" name="orgcdid" class="input_select" >
+								<option value=''>全部</option>
+								<option value='1'>上海 - 聯蔚</option>
+								<option value='2'>上海 - 坤燭</option>
+								<option value='3'>上海 - 桂港</option>
+								<option value='4'>上海 - 企原</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td style="text-align: right;"><input type="checkbox" />记住用户名</td>
+					</tr>
+					<tr>
+						<td colspan="4" style="text-align: right;">
+							<INPUT name="button" class="login_button" id="button" onclick="btn_login()" type="submit" value="登录" />
+						</td>
+					</tr>
+				</table>
+			</DIV>
+		</DIV>
+	</DIV>
+</BODY>
+</HTML>

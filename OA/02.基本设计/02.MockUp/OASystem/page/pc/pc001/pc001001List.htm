@@ -1,0 +1,118 @@
+
+
+
+
+ 
+
+
+
+<html>
+<head>
+	<title>OA系统</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<script type="text/javascript">
+		var contextPath = "/OASystem";
+		var EOSDEBUG = true;
+		var FINAL_PANEL_HEIGHT = 22;
+		
+		var IFRAME_MODIFY_HEIGHE = 35;
+		
+		var TREE_MODIFY_HEIGHT = 22;
+	</script>
+	<link  rel="stylesheet" type="text/css" href="../../../resources/css/style.css"/>
+	<link  rel="stylesheet" type="text/css" href="../../../resources/css/main.css"/>
+	<link  rel="stylesheet" type="text/css" href="../../../resources/css/home.css"/>
+	<link  rel="stylesheet" type="text/css" href="../../../resources/css/tab_style.css"/>
+	<link  rel="stylesheet" type="text/css" href="../../../resources/css/autovalidate.css"/>
+	<link  rel="stylesheet" type="text/css" href="../../../resources/css/simpletooltip.css"/>
+	<script type="text/javascript" src="../../../resources/js/jquery-1.4.4.min.js"></script>
+	<script type="text/javascript" src="../../../resources/js/jquery.numberFormat.js"></script>
+	<script type="text/javascript" src="../../../resources/js/jquery.validate.js"></script>
+	<script type="text/javascript" src="../../../resources/js/jquery.singlevalidate.js"></script>
+	<script type="text/javascript" src="../../../resources/js/jquery.autovalidate.js"></script>
+	<script type="text/javascript" src="../../../resources/js/common_busi.js"></script>
+	<script type="text/javascript" src="../../../resources/js/common_init.js"></script>
+	<script type="text/javascript" src="../../../resources/js/messages.js"></script>
+	<script type="text/javascript" src="../../../resources/js/pagination.js"></script>
+	<script type="text/javascript" src="../../../resources/My97DatePicker/WdatePicker.js"></script>
+
+
+<script type="text/javascript">
+/*
+*名       称: btn_apply( )
+*输入参数: 无
+*输出参数: 无
+*机       能: 申请到对应的申请单
+*创 建  者: yuliang          
+*创建时间: 2015-12-8
+*更 新  者: 
+*更新时间: 
+*/
+function btn_apply( ){	
+	c_ShowProgressBar(); 
+	window.location.href="pc001002A1.htm";
+}
+</script>
+</head>
+<body>
+<form id="queryForm" action="" method="post" > 
+	<div class="div_navi"><span><img src="../../../resources/images/home.png">&nbsp;您当前的位置：申请管理&nbsp;&gt;&nbsp;申请单填写&nbsp;&gt;&nbsp;申请单填写一览</span></div>
+	<div class="div_search_title">
+		<table class="tb_title">
+			<tbody>
+				<tr class="tr_caption">
+					<td class="td_caption_mark">
+						<img src="../../../resources/images/m_nav_dian.gif"></img>
+					<td class="td_caption">
+						申请单一览
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="div_search_content">
+	  <table class="tb_search check_specialchar">
+	    <tbody>
+			<tr>
+				<td class="td_key" width="8%" nowrap><font color="#ff0000">*</font><label class="message">申请单</label></td>
+				<td class="td_value" width="26%">
+					<select id='orgcdid' name= 'orgcdid' class='input_select' >
+						<option value=''>请选择</option>
+						<option value='A1' selected='selected'>A1-休假申请</option>
+						<option value='A2'>A2-休假取消申请</option>
+						<option value='A3'>A3-加班申请</option>
+						<option value='A4'>A4-加班确认申请</option>
+						<option value='A5'>A5-出差申请</option>
+						<option value='A6'>A6-出差结算申请</option>
+					</select>
+				</td>
+				<td class="td_value" width="18%" nowrap>
+					<input name="button" id="login" type="button" class="btn" value="申&nbsp;请" onClick="btn_apply();"> 
+				</td>
+				<td class="td_value" width="18%" nowrap>
+				
+				</td>
+			</tr>	 
+			<tr>				
+				<td colspan="2" align="right">					
+				</td>
+	      	</tr>
+	    </tbody>
+	  </table>
+	</div>
+</form>
+
+<form action="pa001001view" id="viewForm" name="viewForm" method="post">
+	
+	<input name="empname" type="hidden"  value="" />
+	<input name="entrytimestart" type="hidden"  value="" />
+	<input name="entrytimeend" type="hidden"  value="" />
+	<input name="status" type="hidden"  value="" />
+	<input name="orgcdid" type="hidden"  value="" />
+	<input name="depid" type="hidden"  value="" />
+		
+	<input name="empid" type="hidden"  />
+</form>
+
+</body>
+</html>
