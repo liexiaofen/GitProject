@@ -146,7 +146,7 @@ create table t_empinfo (
    empid                varchar(100)         not null,
    empname              varchar(255)         null,
    empenname			varchar(255)         null,
-   empno                varchar(255)         null,
+   empno                varchar(20)         null,
    workage				varchar(2)           null,
    email                varchar(100)         null,
    mobile               varchar(11)          null,
