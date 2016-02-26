@@ -48,9 +48,9 @@
 *更新时间: 
 */
 function btn_save() {	
-	/*if ( !$.fn.autovalidateForm("addForm") ){
+	if ( !$.fn.autovalidateForm("addForm") ){
 		return;
-	}*/
+	}
 	
 	if ( !window.confirm( Message.getString("MSG_IC_COMM_0002"))) 
 		return;
@@ -211,7 +211,7 @@ function btn_clear(obj) {
 				<td class="td_value" colspan="3">
 					<input id="roles" name="roles" class="input_bigger1" readonly="readonly" title='required'/>
 					<input name="search" id="search" type="button" class="btn" value="选&nbsp;择" onClick="btn_roleListSearch()" />
-					<input name="reset" id="reset" type="button" class="btn" value="清&nbsp;空" onclick="btn_clear(this)">
+					<input name="reset" id="reset" type="button" class="btn" value="清&nbsp;空" onClick="btn_clear(this)">
 					<input id="roleids" name="roleids" type="hidden" />
 				</td>			
 				<td class="td_key" width="8%">
@@ -246,7 +246,7 @@ function btn_clear(obj) {
 					<textarea id="orgcddepposes" name="orgcddepposes"  class="input_memo_long" readonly="readonly" title='required'>
 					</textarea>
 					<input name="search" id="search" type="button" class="btn" value="选&nbsp;择" onClick="btn_orgListSearch()" />
-					<input name="reset" id="reset" type="button" class="btn" value="清&nbsp;空" onclick="btn_clear(this)">
+					<input name="reset" id="reset" type="button" class="btn" value="清&nbsp;空" onClick="btn_clear(this)">
 					<input id="orgcddepposids" name="orgcddepposids" type="hidden" value="20151203103551f2a3Ga4HHlvd0180:0:0,20151203103207nY8O0cCFSV66a5hu:0:0,201512031034130420M96hs50g8KDT:0:0"/>
 					
 				</td>
