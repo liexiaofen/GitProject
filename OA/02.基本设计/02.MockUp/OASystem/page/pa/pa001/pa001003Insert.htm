@@ -48,9 +48,6 @@
 *更新时间: 
 */
 function btn_save() {	
-	if ( !$.fn.autovalidateForm("addForm") ){
-		return;
-	}
 	
 	if ( !window.confirm( Message.getString("MSG_IC_COMM_0002"))) 
 		return;
