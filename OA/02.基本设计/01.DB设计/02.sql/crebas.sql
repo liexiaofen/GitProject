@@ -504,6 +504,7 @@ create table t_applyform (
 	evectionallowance	decimal(18, 2)     null,
 	totalmoney			decimal(18, 2)     null,
 	status				Varchar(1)         null,
+	checklevel			Varchar(1)         null,
 	remark				Varchar(255)         null,
 	remark1				Varchar(255)         null,
 	remark2				Varchar(255)         null,
