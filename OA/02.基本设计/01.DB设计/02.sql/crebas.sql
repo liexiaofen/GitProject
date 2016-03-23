@@ -106,12 +106,6 @@ if exists (select 1
 go
 if exists (select 1
             from  sysobjects
-           where  id = object_id('t_applyconnect')
-            and   type = 'U')
-   drop table t_applyconnect
-go
-if exists (select 1
-            from  sysobjects
            where  id = object_id('t_ticketdetail')
             and   type = 'U')
    drop table t_ticketdetail
@@ -512,6 +506,7 @@ create table t_applyform (
 	evectioncity		Varchar(2)         null,
 	evectionaddress1	Varchar(20)         null,
 	evectionaddress2	Varchar(20)         null,
+	evectionconnects	Varchar(30)         null,
 	evectionstart		Varchar(1)         null,
 	airplaneflag		Varchar(1)         null,
 	totalhours			Varchar(3)         null,
@@ -596,27 +591,6 @@ go
 ALTER TABLE t_emprole ADD  CONSTRAINT DF_t_emprole_deletefg  DEFAULT '0' FOR deletefg
 GO
 /*==============================================================*/
-/* Table: t_applyconnect                                             */
-/*==============================================================*/
-create table t_applyconnect (
-   creator				varchar(100)		 null,
-   createtime           datetime             null,
-   updator				varchar(100)		 null,
-   updatetime           datetime             null,
-   exclusivefg			varchar(32)		 	 null,
-   orgid				varchar(255)		 null,
-   deletefg				char(1)		 		 not null,
-   applyid				varchar(100)         not null,
-   empid              	varchar(100)         not null,
-   remark1              varchar(255)        null,
-   remark2              varchar(255)        null,
-   remark3              varchar(255)        null,
-   constraint PK_t_applyconnect primary key nonclustered (applyid,empid)
-)
-go
-ALTER TABLE t_applyconnect ADD  CONSTRAINT DF_t_applyconnect_deletefg  DEFAULT '0' FOR deletefg
-GO
-/*==============================================================*/
 /* Table: t_ticketdetail                                             */
 /*==============================================================*/
 create table t_ticketdetail (
@@ -629,12 +603,13 @@ create table t_ticketdetail (
    deletefg				char(1)		 		not null,
    ticketdetailid		varchar(100)        not null,
    applyid              varchar(100)        not null,
-   orderdate            date 				null,
+   orderdate            varchar(10)		 	null,
    flight				varchar(30)		 	null,
    start				varchar(20)		 	null,
    reach				varchar(20)		 	null,
    discountflag			varchar(1)		 	null,
    ticketflag			varchar(1)		 	null,
+   sortno				varchar(2)		 	null,
    remark1              varchar(255)        null,
    remark2              varchar(255)        null,
    remark3              varchar(255)        null,
